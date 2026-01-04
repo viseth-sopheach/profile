@@ -6,7 +6,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 bg-blue-900 px-10 py-5 z-30">
+      <nav className="fixed top-0 left-0 right-0 bg-[#140e38] px-10 py-5 z-30">
         <div className="flex items-center justify-between">
           <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
             Sopheach Viseth
@@ -53,7 +53,7 @@ function Navbar() {
 
       {/* Mobile off-canvas menu - slides from left */}
       <div
-        className={`sm:hidden fixed top-0 left-0 h-full w-64 bg-blue-900 z-50 transform transition-transform duration-300 ${
+        className={`sm:hidden fixed top-0 left-0 h-full w-55 bg-blue-900 z-50 transform transition-transform duration-300 ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

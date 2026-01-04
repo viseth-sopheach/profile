@@ -1,28 +1,114 @@
-import React from 'react'
+import React, { useState } from "react";
+import { FaEye } from "react-icons/fa";
+import { IoMdDownload } from "react-icons/io";
+import { NavLink } from "react-router-dom";
+import cv from "../assets/cv.png";
 
 const Home = () => {
+  const [showCV, setShowCV] = useState(false);
+
+  const download = () => {
+    const link = document.createElement("a");
+    link.href = cv;
+    link.download = "My_CV.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div className='flex flex-col md:flex-row bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 min-h-screen md:min-h-0'>
-      <div className='w-full md:w-1/2 px-6 sm:px-10 md:px-20 py-8 md:pt-10 md:pb-10 flex flex-col justify-center'>
-        <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-white pt-2 pb-2'>
+    <div className="flex flex-col md:flex-row bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a] min-h-screen">
+      <div className="w-full md:w-1/2 px-6 sm:px-10 md:px-20 py-8 flex flex-col justify-center">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white pb-2">
           Welcome to my portfolio
         </h1>
-        <h1 className='text-lg sm:text-xl md:text-2xl text-white pt-2 pb-2'>
-          ខ្ញុំបាទឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ
+        <h1 className="text-lg sm:text-xl md:text-2xl text-white pb-2">
+          ខ្ញុំបាទឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២
+          នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ ដេប៉ាតាម៉ង់ Computer Science
         </h1>
-        <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-white pt-2 pb-2 leading-relaxed'>
-          My goal is to become a full-stack developer specializing in web and mobile applications, while building a professional career with a degree in Information Technology.
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white pb-2">
+          I am a front-end developer
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white leading-relaxed">
+          My goal is to become a full-stack developer specializing in web and
+          mobile applications, while building a professional career with a
+          degree in Information Technology.
         </p>
+        <div className="flex gap-10 pt-5">
+          <button
+            onClick={() => setShowCV(true)}
+            className="flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
+          >
+            VIEW MY CV
+            <FaEye />
+          </button>
+          <button
+            onClick={download}
+            className="flex gap-2 items-center text-white bg-green-400 hover:bg-orange-500 transition rounded-lg p-2"
+          >
+            DOWNLOAD MY CV
+            <IoMdDownload />
+          </button>
+        </div>
       </div>
-      <div className='w-full md:w-1/2 flex items-center justify-center py-8 md:py-0'>
-        <img 
-          className='w-48 sm:w-64 md:w-72 lg:w-80 rounded-full shadow-lg' 
-          src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740&q=80" 
-          alt="Profile" 
-        />
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center py-8">
+        <div className="flex">
+          <div className="p-2 flex flex-col gap-5 items-end">
+            <img
+              className="w-12"
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+              alt="React"
+            />
+            <img
+              className="w-12"
+              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
+              alt="Tailwind"
+            />
+          </div>
+          <img
+            className="w-64 rounded-full shadow-lg"
+            src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
+            alt="Profile"
+          />
+        </div>
+        <div className="flex gap-4 pt-4">
+          <img
+            className="w-12"
+            src="https://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/Other-html-5-icon.png"
+            alt="HTML"
+          />
+          <img
+            className="w-12"
+            src="https://images.icon-icons.com/844/PNG/512/CSS3_icon-icons.com_67069.png"
+            alt="CSS"
+          />
+          <img
+            className="w-12"
+            src="https://static.vecteezy.com/system/resources/previews/027/127/463/non_2x/javascript-logo-javascript-icon-transparent-free-png.png"
+            alt="JS"
+          />
+          <img
+            className="w-12"
+            src="https://raw.githubusercontent.com/themedotid/bootstrap-icon/HEAD/docs/bootstrap-icon-css.png"
+            alt="Bootstrap"
+          />
+        </div>
       </div>
+      {showCV && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="relative bg-white p-4 rounded-lg max-w-3xl w-full">
+            <button
+              onClick={() => setShowCV(false)}
+              className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded"
+            >
+              X
+            </button>
+            <img src={cv} alt="My CV" className="w-1/2 h-auto rounded" />
+          </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
