@@ -1,69 +1,104 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className='bg-purple-200 px-10 py-5'>
-      <div className='flex items-center'>
-        <h1 className='text-xl mx-5 sm:text-2xl md:text-3xl lg:text-4xl font-bold'>
-          Sopheach <br className="sm:hidden" />Viseth
-        </h1>
-        <h1 className='hidden sm:block font-bold text-5xl pt-0 pb-4 absolute left-1/2 -translate-x-1/2'>Computer Scient</h1>
-        
-        {/* Menu button - only visible on mobile */}
-        <button 
-          className='ml-auto sm:hidden text-2xl font-bold'
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? '✕ ': '☰'}
-        </button>
+    <>
+      <nav className="fixed top-0 left-0 right-0 bg-blue-900 px-10 py-5 z-30">
+        <div className="flex items-center justify-between">
+          <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
+            Sopheach Viseth
+          </h1>
 
+          {/* Menu button - only visible on mobile */}
+          <button
+            className="sm:hidden text-2xl font-bold text-white z-50"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            ☰
+          </button>
 
-        {/* Desktop menu - hidden on mobile */}
-        <ul className='hidden sm:flex gap-4 ml-[50%] font-bold'>
-          {["/", "/about", "/contact"].map((path, i) => {
-            const name = ["Home", "About Me", "Contact Me"];
-            return (
-              <li key={path}>
-                <NavLink to={path}>
-                  <button className='bg-purple-950 rounded-lg mx-0 p-3 text-white'>
-                    {name[i]}
-                  </button>
-                </NavLink>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+          {/* Desktop menu - hidden on mobile */}
+          <ul className="hidden sm:flex gap-2 lg:gap-4 font-bold">
+            {["/", "/edocation", "/skill", "/project", "/contact"].map(
+              (path, i) => {
+                const name = [
+                  "Home",
+                  "Edocation",
+                  "Skill",
+                  "Project",
+                  "Contact Me",
+                ];
+                return (
+                  <li key={path}>
+                    <NavLink to={path}>
+                      <button className="bg-purple-950 rounded-lg px-3 py-2 lg:px-4 lg:py-3 text-white text-sm lg:text-base whitespace-nowrap hover:bg-purple-800 transition-colors">
+                        {name[i]}
+                      </button>
+                    </NavLink>
+                  </li>
+                );
+              }
+            )}
+          </ul>
+        </div>
+      </nav>
 
-      {/* Mobile menu - with transition animation */}
-      <div 
-        className={`sm:hidden overflow-hidden transition-all duration-300 ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      {/* Overlay - only on mobile */}
+      {isMenuOpen && (
+        <div className="sm:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300" />
+      )}
+
+      {/* Mobile off-canvas menu - slides from left */}
+      <div
+        className={`sm:hidden fixed top-0 left-0 h-full w-64 bg-blue-900 z-50 transform transition-transform duration-300 ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <ul className='flex flex-col gap-4 mt-4 font-bold '>
-          {["/", "/about", "/contact"].map((path, i) => {
-            const name = ["Home", "About Me", "Contact Me"];
-            return (
-              <li className='ml-auto' key={path}>
-                <NavLink 
-                  to={path}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <button className='bg-purple-950 rounded-lg mx-0 p-3 text-white'>
-                    {name[i]}
-                  </button>
-                </NavLink>
-              </li>
-            );
-          })}
+        {/* Close button */}
+        <div className="flex items-center justify-between p-5 border-b border-blue-700">
+          <h1 className="text-white text-lg font-bold">Sopheach Viseth</h1>
+          <button
+            className="text-white text-2xl font-bold hover:bg-blue-800 rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Menu items */}
+        <ul className="flex flex-col gap-4 px-5 pt-2 font-bold">
+          {["/", "/edocation", "/skill", "/project", "/contact"].map(
+            (path, i) => {
+              const name = [
+                "Home",
+                "Edocation",
+                "Skill",
+                "Project",
+                "Contact Me",
+              ];
+              return (
+                <li key={path}>
+                  <NavLink
+                    to={path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block"
+                  >
+                    <button className="bg-purple-950 rounded-lg px-4 py-3 text-white hover:bg-purple-800 transition-colors w-full text-left">
+                      {name[i]}
+                    </button>
+                  </NavLink>
+                </li>
+              );
+            }
+          )}
         </ul>
       </div>
-    </nav>
-  )
+    </>
+  );
 }
 
-export default Navbar
+export default Navbar;

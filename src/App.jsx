@@ -1,18 +1,22 @@
 import React from 'react'
 import Navbar from './pages/Navbar';
-import About from './pages/About';
-import Home from './pages/Home'
-import Contact from './pages/Contact'
+import Home from './pages/Home';
+import Education from './pages/Education';
+import Contact from './pages/Contact';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Skill from './pages/Skill';
+import Project from './pages/Project';
 
 const App = () => {
   return (
     <Router>
       <Navbar/>
-      <main>
+      <main className='pt-18'>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/edocation" element={<Education />} />
+          <Route path="/skill" element={<Skill />} />
+          <Route path="/project" element={<Project />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
