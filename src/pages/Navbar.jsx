@@ -8,7 +8,7 @@ function Navbar() {
     <>
       <nav className="fixed top-0 left-0 right-0 bg-[#140e38] px-10 py-5 z-30">
         <div className="flex items-center justify-between">
-          <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
+          <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] transition-all duration-300">
             Sopheach Viseth
           </h1>
 
@@ -22,11 +22,11 @@ function Navbar() {
 
           {/* Desktop menu - hidden on mobile */}
           <ul className="hidden sm:flex gap-2 lg:gap-4 font-bold">
-            {["/", "/edocation", "/skill", "/project", "/contact"].map(
+            {["/", "/education", "/skill", "/project", "/contact"].map(
               (path, i) => {
                 const name = [
                   "Home",
-                  "Edocation",
+                  "Education",
                   "Skill",
                   "Project",
                   "Contact Me",
@@ -34,7 +34,7 @@ function Navbar() {
                 return (
                   <li key={path}>
                     <NavLink to={path}>
-                      <button className="bg-purple-950 rounded-lg px-3 py-2 lg:px-4 lg:py-3 text-white text-sm lg:text-base whitespace-nowrap hover:bg-purple-800 transition-colors">
+                      <button className="bg-purple-950 rounded-lg px-3 py-2 lg:px-4 lg:py-3 text-white text-sm lg:text-base whitespace-nowrap hover:bg-orange-500 transition-colors">
                         {name[i]}
                       </button>
                     </NavLink>
@@ -59,9 +59,9 @@ function Navbar() {
       >
         {/* Close button */}
         <div className="flex items-center justify-between p-5 border-b border-blue-700">
-          <h1 className="text-white text-lg font-bold">Sopheach Viseth</h1>
+          <h1 className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 text-white text-lg font-bold">Sopheach Viseth</h1>
           <button
-            className="text-white text-2xl font-bold hover:bg-blue-800 rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200"
+            className="text-white text-2xl font-bold hover:bg-red-800 rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200"
             onClick={() => setIsMenuOpen(false)}
             aria-label="Close menu"
           >
@@ -71,11 +71,11 @@ function Navbar() {
 
         {/* Menu items */}
         <ul className="flex flex-col gap-4 px-5 pt-2 font-bold">
-          {["/", "/edocation", "/skill", "/project", "/contact"].map(
+          {["/", "/education", "/skill", "/project", "/contact"].map(
             (path, i) => {
               const name = [
                 "Home",
-                "Edocation",
+                "Education",
                 "Skill",
                 "Project",
                 "Contact Me",
@@ -87,7 +87,7 @@ function Navbar() {
                     onClick={() => setIsMenuOpen(false)}
                     className="block"
                   >
-                    <button className="bg-purple-950 rounded-lg px-4 py-3 text-white hover:bg-purple-800 transition-colors w-full text-left">
+                    <button className="bg-purple-950 rounded-lg px-4 py-3 text-white hover:bg-orange-500 transition-colors w-full text-left">
                       {name[i]}
                     </button>
                   </NavLink>
