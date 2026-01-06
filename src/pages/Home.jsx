@@ -4,6 +4,7 @@ import { IoMdDownload } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import cv from "../assets/cv.png";
+import img from "../assets/seth.png"
 
 const Home = () => {
   const [showCV, setShowCV] = useState(false);
@@ -96,7 +97,7 @@ const Home = () => {
           </div>
           <img
             className="w-64 rounded-full shadow-lg"
-            src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
+            src={img}
             alt="Profile"
           />
         </div>
