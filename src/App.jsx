@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <main className="pt-10">
+      <main className="pt-0">
         <Routes>
           <Route
             path="/"
@@ -20,6 +20,7 @@ const App = () => {
                 <Education />
                 <Skill />
                 <Project />
+                <Contact />
               </>
             }
           />

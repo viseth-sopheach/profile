@@ -2,7 +2,7 @@ import React from "react";
 
 const Education = () => {
   return (
-    <div className="pt-10 px-4 sm:px-6 md:px-10 min-h-screen bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a]">
+    <div className="pt-20 px-4 sm:px-6 md:px-10 min-h-screen bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a]">
       {/* Main Heading */}
       <h1 className="text-2xl sm:text-5xl md:text-4xl text-left ml-5 md:text-left pt-1 md:pt-10 text-white font-bold underline decoration-2 decoration-blue-400 underline-offset-6 hover:decoration-orange-310 transition-all duration-700">
         Education and Certificates
