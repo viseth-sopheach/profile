@@ -4,7 +4,7 @@ import { IoMdDownload } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import cv from "../assets/cv.png";
-import img from "../assets/seth.png"
+import img from "../assets/seth.png";
 
 const Home = () => {
   const [showCV, setShowCV] = useState(false);
@@ -45,12 +45,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a] min-h-screen">
+    <div className="pt-5 md:pt-0 flex flex-col md:flex-row bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a] min-h-[81vh]">
       <div className="w-full md:w-1/2 px-6 sm:px-10 md:px-20 py-8 flex flex-col justify-center">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white pb-2">
           Welcome to my portfolio
         </h1>
-        <h1 className="text-lg sm:text-xl md:text-2xl text-white pb-2">
+        <h1 className="pt-5 text-lg sm:text-xl md:text-2xl text-white pb-5">
           ខ្ញុំបាទឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២
           នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ ដេប៉ាតាម៉ង់ Computer Science
         </h1>
@@ -58,12 +58,12 @@ const Home = () => {
           {text}
           <span className="animate-pulse">|</span>
         </h1>
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white leading-relaxed">
+        <p className="pt-5 text-base sm:text-lg md:text-xl lg:text-2xl text-white leading-relaxed">
           My goal is to become a full-stack developer specializing in web and
           mobile applications, while building a professional career with a
           degree in Information Technology.
         </p>
-        <div className="flex gap-10 pt-5">
+        <div className="flex gap-10 pt-10">
           <button
             onClick={() => setShowCV(true)}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"

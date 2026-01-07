@@ -1,19 +1,28 @@
-import React from 'react'
-import Navbar from './pages/Navbar';
-import Home from './pages/Home';
-import Education from './pages/Education';
-import Contact from './pages/Contact';
+import Navbar from "./pages/Navbar";
+import Home from "./pages/Home";
+import Education from "./pages/Education";
+import Contact from "./pages/Contact";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Skill from './pages/Skill';
-import Project from './pages/Project';
+import Skill from "./pages/Skill";
+import Project from "./pages/Project";
 
 const App = () => {
   return (
     <Router>
-      <Navbar/>
-      <main className='pt-10'>
+      <Navbar />
+      <main className="pt-10">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Home />
+                <Education />
+                <Skill />
+                <Project />
+              </>
+            }
+          />
           <Route path="/education" element={<Education />} />
           <Route path="/skill" element={<Skill />} />
           <Route path="/project" element={<Project />} />
@@ -21,7 +30,7 @@ const App = () => {
         </Routes>
       </main>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
