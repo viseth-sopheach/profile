@@ -27,8 +27,8 @@ const Education = () => {
             </div>
             <div className="text-white font-bold hover:bg-purple-400/10 py-5 px-4 rounded transition-all duration-100">
               <p>ROYAL UNIVERSITY OF PHNOM PENH</p>
-              <p>2015 - present</p>
-              <p>I am a year II student</p>
+              <p>2025 - present</p>
+              <p>I am in my second year</p>
             </div>
           </div>
         </div>
