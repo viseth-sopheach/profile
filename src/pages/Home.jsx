@@ -5,6 +5,14 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import cv from "../assets/cv.png";
 import img from "../assets/seth.png";
+import { FaReact } from "react-icons/fa";
+import { RiTailwindCssLine } from "react-icons/ri";
+import { FaBootstrap } from "react-icons/fa";
+import { FaCss3 } from "react-icons/fa";
+import { FaHtml5 } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io5";
+import { FaJava } from "react-icons/fa6";
+import { FaVuejs } from "react-icons/fa";
 
 const Home = () => {
   const [showCV, setShowCV] = useState(false);
@@ -12,19 +20,30 @@ const Home = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const fullText = "I am a front-end developer";
 
+  const sideIcons = [
+    { icon: <FaReact className="text-cyan-400 w-12 h-12" /> },
+    { icon: <RiTailwindCssLine className="text-sky-400 w-12 h-12" /> },
+    { icon: <FaJava className="text-sky-200 w-12 h-12" />},
+    { icon: <FaVuejs className="text-sky-200 w-12 h-12" />,}
+  ];
+
+  const bottomIcons = [
+    { icon: <FaHtml5 className="text-orange-500 w-12 h-12" /> },
+    { icon: <FaCss3 className="text-blue-500 w-12 h-12" /> },
+    { icon: <IoLogoJavascript className="text-yellow-400 w-12 h-12" /> },
+    { icon: <FaBootstrap className="text-purple-500 w-12 h-12" /> },
+  ];
+
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100;
-    const pauseEnd = 2000; // Pause at end before deleting
+    const pauseEnd = 2000;
 
     const timer = setTimeout(() => {
       if (!isDeleting && text === fullText) {
-        // Pause before starting to delete
         setTimeout(() => setIsDeleting(true), pauseEnd);
       } else if (isDeleting && text === "") {
-        // Start typing again
         setIsDeleting(false);
       } else {
-        // Type or delete next character
         setText((current) =>
           isDeleting
             ? current.slice(0, -1)
@@ -35,10 +54,11 @@ const Home = () => {
 
     return () => clearTimeout(timer);
   }, [text, isDeleting]);
+
   const download = () => {
     const link = document.createElement("a");
     link.href = cv;
-    link.download = "My_CV.png";
+    link.download = "Viseth.png";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -68,32 +88,22 @@ const Home = () => {
             onClick={() => setShowCV(true)}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
           >
-            VIEW MY CV
-            <FaEye />
+            VIEW MY CV <FaEye />
           </button>
           <button
             onClick={download}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-2 items-center text-white bg-green-400 hover:bg-orange-500 transition rounded-lg p-2"
           >
-            DOWNLOAD MY CV
-            <IoMdDownload />
+            DOWNLOAD MY CV <IoMdDownload />
           </button>
         </div>
       </div>
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center py-8">
-        <div className="flex items-end ">
+        <div className="flex items-end">
           <div className="p-2 flex flex-col gap-5 items-end">
-            <img
-              className="w-12"
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
-              alt="React"
-            />
-            <img
-              className="w-12"
-              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
-              alt="Tailwind"
-            />
-            <img src="" alt="" />
+            {sideIcons.map((item, index) => (
+              <div key={index}>{item.icon}</div>
+            ))}
           </div>
           <img
             className="w-64 rounded-full shadow-lg"
@@ -102,26 +112,9 @@ const Home = () => {
           />
         </div>
         <div className="flex gap-4 pt-4">
-          <img
-            className="w-12"
-            src="https://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/Other-html-5-icon.png"
-            alt="HTML"
-          />
-          <img
-            className="w-12"
-            src="https://images.icon-icons.com/844/PNG/512/CSS3_icon-icons.com_67069.png"
-            alt="CSS"
-          />
-          <img
-            className="w-12"
-            src="https://static.vecteezy.com/system/resources/previews/027/127/463/non_2x/javascript-logo-javascript-icon-transparent-free-png.png"
-            alt="JS"
-          />
-          <img
-            className="w-12"
-            src="https://raw.githubusercontent.com/themedotid/bootstrap-icon/HEAD/docs/bootstrap-icon-css.png"
-            alt="Bootstrap"
-          />
+          {bottomIcons.map((item, index) => (
+            <div key={index}>{item.icon}</div>
+          ))}
         </div>
       </div>
       {showCV && (
@@ -133,8 +126,6 @@ const Home = () => {
             >
               X
             </button>
-
-            {/* CV Container */}
             <div className="flex justify-center items-center max-h-[85vh] overflow-auto">
               <img
                 src={cv}
