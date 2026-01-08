@@ -61,7 +61,7 @@ const Home = () => {
         <p className="pt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-white leading-relaxed">
           My goal is to become a full-stack developer specializing in web and
           mobile applications, while building a professional career with a
-          degree in Information Technology.
+          degree in Computer Science.
         </p>
         <div className="pt-10 flex gap-10">
           <button

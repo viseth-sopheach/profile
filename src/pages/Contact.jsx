@@ -17,7 +17,6 @@ function Contact() {
             you.
           </p>
         </div>
-
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-6 text-white">
             <div className="bg-[#06204a] shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
@@ -25,13 +24,11 @@ function Contact() {
               <p>contact@example.com</p>
               <p>support@example.com</p>
             </div>
-
             <div className="bg-[#06204a] text-white shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
               <h3 className="text-lg font-semibold mb-1">Phone</h3>
               <p> (885) 123-4567</p>
               <p>Mon-Fri, 9am-6pm EST</p>
             </div>
-
             <div className="bg-[#06204a] shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
               <h3 className="text-lg font-semibold text-white mb-1">
                 Location
@@ -71,7 +68,6 @@ function Contact() {
               </Link>
             </div>
           </div>
-
           <div className="bg-[#06204a] shadow-md rounded-xl p-6">
             <form className="space-y-4">
               <div>
@@ -80,44 +76,40 @@ function Contact() {
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="text-white font-bold w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
                   placeholder="Your name"
                 />
               </div>
-
               <div>
                 <label className="block text-white font-medium mb-1">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className=" text-white font-bold w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
                   placeholder="your@email.com"
                 />
               </div>
-
               <div>
                 <label className="block text-white font-medium mb-1">
                   Subject
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="text-white font-bold w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
                   placeholder="How can we help?"
                 />
               </div>
-
               <div>
                 <label className="block text-white font-medium mb-1">
                   Message
                 </label>
                 <textarea
                   rows="4"
-                  className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none"
+                  className="text-white font-bold w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none"
                   placeholder="Tell us more..."
                 ></textarea>
               </div>
-
               <button
                 type="submit"
                 className="w-full bg-[#06204a] text-white font-semibold py-2 rounded-md hover:bg-purple-600 transition-colors"

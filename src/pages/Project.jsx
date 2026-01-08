@@ -5,45 +5,58 @@ const projects = [
   {
     id: 1,
     image: "https://freesvg.org/img/1488216538.png",
-    title: "Click Here To See BookShop Site",
+    title: "BookShop Site",
     link: "https://book-one-sage.vercel.app/",
+    color: "bg-purple-600",
   },
   {
     id: 2,
     image: qr,
-    title: "QR Code Generator Site",
+    title: "QR Code Generator",
     link: "https://qrgenerator-alpha-eight.vercel.app/",
+    color: "bg-blue-600",
   },
 ];
 
 const Project = () => {
   return (
-    <div className="pt-25 px-4 sm:px-6 md:px-10 min-h-screen bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a]">
-      <h1 className="text-white text-2xl md:text-4xl justify-center text-center">
-        These are my project !!!
-      </h1>
-      <div className="w-auto ml-0 md:ml-20 pt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="bg-gray-150 rounded-xl shadow-md hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] transform transition-all duration-300 cursor-pointer flex flex-col justify-between"
-          >
-            <div className="w-full h-60 bg-gray-200 flex items-center justify-center rounded-t-xl overflow-hidden">
-              <img src={project.image} alt={project.title} />
-            </div>
+    <div className="pb-10 pt-25 px-4 sm:px-6 md:px-10 min-h-screen bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a]">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-white mb-4">My Projects</h1>
+          <p className="text-gray-400 text-lg">
+            Work I have recently completed
+          </p>
+        </div>
 
-            <div className="p-4 flex flex-col grow justify-between">
-              <button
-                className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-purple-950 hover:bg-orange-500 transition rounded-lg p-2"
-                onClick={() => window.open(project.link, "_blank")}
-              >
-                <p className="text-[8px] md:text-2xl flex gap-3">
-                  {project.title} <GiClick />
-                </p>
-              </button>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              onClick={() => window.open(project.link, "_blank")}
+              className="group relative bg-gray-800 rounded-xl p-4 transform transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-gray-600 flex flex-col items-center"
+            >
+              <div className="w-full h-40 bg-gray-900 rounded-lg flex items-center justify-center overflow-hidden mb-4">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-contain p-2 transform transition-transform duration-300"
+                />
+              </div>
+              <div className="flex flex-col items-center space-y-3">
+                <h3 className="text-white font-semibold text-lg text-center">
+                  {project.title}
+                </h3>
+                <div
+                  className={`${project.color} p-2 rounded-full text-white text-xl transform group-hover:rotate-12 transition-transform duration-300`}
+                >
+                  <GiClick />
+                </div>
+              </div>
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300 pointer-events-none"></div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

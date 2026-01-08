@@ -59,7 +59,9 @@ function Navbar() {
       >
         {/* Close button */}
         <div className="flex items-center justify-between p-5 border-b border-blue-700">
-          <h1 className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 text-white text-lg font-bold">Sopheach Viseth</h1>
+          <h1 className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 text-white text-lg font-bold">
+            Sopheach Viseth
+          </h1>
           <button
             className="text-white text-2xl font-bold hover:bg-red-800 rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200"
             onClick={() => setIsMenuOpen(false)}

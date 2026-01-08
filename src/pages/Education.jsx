@@ -10,7 +10,6 @@ const Education = () => {
 
       {/* Two Column Layout */}
       <div className="flex flex-col md:flex-row mt-10 ">
-        {/* Education Section */}
         <div className="flex-1 px-4 md:pl-40 md:px-0 border-r-0 md:border-r border-white border-b md:border-b-0">
           <h2 className="text-white text-3xl font-bold mb-6">Education</h2>
           <div className="space-y-4">
@@ -43,7 +42,10 @@ const Education = () => {
               <p>2021</p>
             </div>
             <div className="text-white font-bold hover:bg-purple-400/30 py-5 px-4 rounded transition-all duration-100">
-              <p>BacII ទទូលបាននិទ្ទេស A លើមុខវិជ្ជា គណិតវិទ្យា រូបវិទ្យា និងគីមីវិទ្យា</p>
+              <p>
+                BacII ទទូលបាននិទ្ទេស A លើមុខវិជ្ជា គណិតវិទ្យា រូបវិទ្យា
+                និងគីមីវិទ្យា
+              </p>
               <p>2024</p>
             </div>
             <div className="text-white font-bold hover:bg-purple-400/30 py-5 px-4 rounded transition-all duration-100">
@@ -53,7 +55,6 @@ const Education = () => {
               </p>
               <p>ពានរង្វាន់សម្ដេចតេជោ ហ៊ុន សែន</p>
             </div>
-            {/* Add more certificates here */}
           </div>
         </div>
       </div>
