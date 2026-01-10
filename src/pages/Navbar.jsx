@@ -26,7 +26,7 @@ function Navbar() {
               (path, i) => {
                 const name = [
                   "Home",
-                  "Education",
+                  "Education nad Certificate",
                   "Skill",
                   "Project",
                   "Contact Me",

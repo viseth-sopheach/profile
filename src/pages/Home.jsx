@@ -106,12 +106,12 @@ const Home = () => {
             ))}
           </div>
           <img
-            className="w-64 rounded-full shadow-lg"
+            className="w-64 rounded-xl shadow-lg"
             src={img}
             alt="Profile"
           />
         </div>
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-4 ml-13">
           {bottomIcons.map((item, index) => (
             <div key={index}>{item.icon}</div>
           ))}
