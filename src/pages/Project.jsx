@@ -1,10 +1,11 @@
 import { GiClick } from "react-icons/gi";
 import qr from "../assets/qrcode.png";
+import book from "../assets/bIcon.png";
 
 const projects = [
   {
     id: 1,
-    image: "https://freesvg.org/img/1488216538.png",
+    image: book,
     title: "BookShop Site",
     link: "https://book-one-sage.vercel.app/",
     color: "bg-purple-600",

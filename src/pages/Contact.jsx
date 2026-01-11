@@ -27,7 +27,7 @@ function Contact() {
             <div className="bg-[#06204a] text-white shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
               <h3 className="text-lg font-semibold mb-1">Phone</h3>
               <p> (885) 123-4567</p>
-              <p>Mon-Fri, 9am-6pm EST</p>
+              <p>Mon-Fri, 9am-6pm</p>
             </div>
             <div className="bg-[#06204a] shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
               <h3 className="text-lg font-semibold text-white mb-1">
