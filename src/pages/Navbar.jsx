@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
@@ -23,7 +23,7 @@ function Navbar() {
           {/* Desktop menu - hidden on mobile */}
           <ul className="hidden sm:flex gap-2 lg:gap-4 font-bold">
             {["/", "/education", "/skill", "/project", "/contact"].map(
-              (path, i) => {
+              (path, index) => {
                 const name = [
                   "Home",
                   "Education nad Certificate",
@@ -35,7 +35,7 @@ function Navbar() {
                   <li key={path}>
                     <NavLink to={path}>
                       <button className="bg-purple-950 rounded-lg px-3 py-2 lg:px-4 lg:py-3 text-white text-sm lg:text-base whitespace-nowrap hover:bg-orange-500 transition-colors">
-                        {name[i]}
+                        {name[index]}
                       </button>
                     </NavLink>
                   </li>
