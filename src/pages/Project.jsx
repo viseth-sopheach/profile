@@ -1,6 +1,7 @@
 import { GiClick } from "react-icons/gi";
 import qr from "../assets/qrcode.png";
 import book from "../assets/bIcon.png";
+import apple from "../assets/apple.png";
 
 const projects = [
   {
@@ -15,6 +16,13 @@ const projects = [
     image: qr,
     title: "QR Code Generator",
     link: "https://qrgenerator-alpha-eight.vercel.app/",
+    color: "bg-blue-600",
+  },
+  {
+    id: 3,
+    image: apple,
+    title: "Phone Shop",
+    link: "https://phoneshop-woad.vercel.app/",
     color: "bg-blue-600",
   },
 ];
