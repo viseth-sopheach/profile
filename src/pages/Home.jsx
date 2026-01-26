@@ -23,8 +23,8 @@ const Home = () => {
   const sideIcons = [
     { icon: <FaReact className="text-cyan-400 w-12 h-12" /> },
     { icon: <RiTailwindCssLine className="text-sky-400 w-12 h-12" /> },
-    { icon: <FaJava className="text-sky-200 w-12 h-12" />},
-    { icon: <FaVuejs className="text-sky-200 w-12 h-12" />,}
+    { icon: <FaJava className="text-sky-200 w-12 h-12" /> },
+    { icon: <FaVuejs className="text-sky-200 w-12 h-12" /> },
   ];
 
   const bottomIcons = [
@@ -47,7 +47,7 @@ const Home = () => {
         setText((current) =>
           isDeleting
             ? current.slice(0, -1)
-            : fullText.slice(0, current.length + 1)
+            : fullText.slice(0, current.length + 1),
         );
       }
     }, typingSpeed);
@@ -62,6 +62,10 @@ const Home = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const requestToViseth = () => {
+    window.open("https://t.me/viseth_sopheach", "_blank");
   };
 
   return (
@@ -83,7 +87,24 @@ const Home = () => {
           mobile applications, while building a professional career with a
           degree in Computer Science.
         </p>
+
         <div className="pt-10 flex gap-10">
+          <button
+            onClick={requestToViseth}
+            className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
+          >
+            REQUEST MY CV <FaEye />
+          </button>
+
+          <button
+            onClick={requestToViseth}
+            className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-2 items-center text-white bg-green-400 hover:bg-orange-500 transition rounded-lg p-2"
+          >
+            REQUEST DOWNLOAD <IoMdDownload />
+          </button>
+        </div>
+
+        {/* <div className="pt-10 flex gap-10">
           <button
             onClick={() => setShowCV(true)}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
@@ -96,7 +117,7 @@ const Home = () => {
           >
             DOWNLOAD MY CV <IoMdDownload />
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center py-8">
         <div className="flex items-end">
@@ -105,11 +126,7 @@ const Home = () => {
               <div key={index}>{item.icon}</div>
             ))}
           </div>
-          <img
-            className="w-64 rounded-xl shadow-lg"
-            src={img}
-            alt="Profile"
-          />
+          <img className="w-64 rounded-xl shadow-lg" src={img} alt="Profile" />
         </div>
         <div className="flex gap-4 pt-4 ml-13">
           {bottomIcons.map((item, index) => (

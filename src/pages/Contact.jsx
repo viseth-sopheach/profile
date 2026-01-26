@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import {
   FaFacebookSquare,
@@ -15,90 +15,89 @@ function Contact() {
   const [shareInfo, setShareInfo] = useState(false);
 
   const getDeviceInfo = () => {
-    const userAgent = navigator.userAgent;
-    let browserName = "Unknown";
-    let osName = "Unknown";
-    
-    if (userAgent.indexOf("Firefox") > -1) browserName = "Firefox";
-    else if (userAgent.indexOf("Chrome") > -1) browserName = "Chrome";
-    else if (userAgent.indexOf("Safari") > -1) browserName = "Safari";
-    else if (userAgent.indexOf("Edge") > -1) browserName = "Edge";
-    
-    if (userAgent.indexOf("Win") > -1) osName = "Windows";
-    else if (userAgent.indexOf("Mac") > -1) osName = "MacOS";
-    else if (userAgent.indexOf("Linux") > -1) osName = "Linux";
-    else if (userAgent.indexOf("Android") > -1) osName = "Android";
-    else if (userAgent.indexOf("iOS") > -1) osName = "iOS";
-    
+    const ua = navigator.userAgent;
+    const browser = ua.includes("Edg")
+      ? "Edge"
+      : ua.includes("Firefox")
+        ? "Firefox"
+        : ua.includes("Chrome")
+          ? "Chrome"
+          : ua.includes("Safari")
+            ? "Safari"
+            : "Unknown";
+    const os = ua.includes("Android")
+      ? "Android"
+      : ua.includes("iPhone") || ua.includes("iPad")
+        ? "iOS"
+        : ua.includes("Win")
+          ? "Windows"
+          : ua.includes("Mac")
+            ? "MacOS"
+            : ua.includes("Linux")
+              ? "Linux"
+              : "Unknown";
     return {
-      browser: browserName,
-      os: osName,
-      screenResolution: `${window.screen.width}x${window.screen.height}`,
-      language: navigator.language
+      browser,
+      os,
+      screen: `${window.screen.width}x${window.screen.height}`,
+      language: navigator.language,
     };
   };
 
-  const getLocation = () => {
+  const getLocation = (timeout = 8000) => {
     return new Promise((resolve) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            resolve({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              accuracy: position.coords.accuracy
-            });
-          },
-          (error) => {
-            resolve({ error: "Location access denied" });
-          }
-        );
-      } else {
+      if (!navigator.geolocation) {
         resolve({ error: "Geolocation not supported" });
+        return;
       }
+      navigator.geolocation.getCurrentPosition(
+        (pos) =>
+          resolve({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+            accuracy: pos.coords.accuracy,
+          }),
+        (err) => resolve({ error: err.message }),
+        { timeout },
+      );
     });
   };
+
+  const buildTemplateParams = (form, device, location) => ({
+    user_name: form.user_name.value,
+    user_email: form.user_email.value,
+    subject: form.subject.value,
+    message: form.message.value,
+
+    device_info: device
+      ? `Browser: ${device.browser}, OS: ${device.os}, Screen: ${device.screen}, Lang: ${device.language}`
+      : "Not shared",
+    location_info: location
+      ? location.error ||
+        `Lat: ${location.lat}, Lng: ${location.lng}, ±${location.accuracy}m`
+      : "Not shared",
+    timestamp: new Date().toLocaleString(),
+  });
 
   const sendEmail = async (e) => {
     e.preventDefault();
     setIsSending(true);
-
     try {
-      let deviceInfo = null;
-      let locationInfo = null;
-
-      if (shareInfo) {
-        deviceInfo = getDeviceInfo();
-        locationInfo = await getLocation();
-      }
-
-      const SERVICE_ID = "service_alvub5r";
-      const TEMPLATE_ID = "template_lsfy6ie";
-      const PUBLIC_KEY = "_32Bh6BEuVqRbRXpi";
-
-      const templateParams = {
-        user_name: e.target.user_name.value,
-        user_email: e.target.user_email.value,
-        subject: e.target.subject.value,
-        message: e.target.message.value,
-        device_info: shareInfo && deviceInfo
-          ? `Browser: ${deviceInfo.browser}, OS: ${deviceInfo.os}, Screen: ${deviceInfo.screenResolution}, Language: ${deviceInfo.language}`
-          : "Not shared",
-        location_info: shareInfo && locationInfo
-          ? (locationInfo.error 
-              ? locationInfo.error 
-              : `Lat: ${locationInfo.latitude}, Lng: ${locationInfo.longitude}, Accuracy: ${locationInfo.accuracy}m`)
-          : "Not shared",
-        timestamp: new Date().toLocaleString()
-      };
-
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-
-      alert("Message sent to visethsopheach@gmail.com successfully!");
+      const device = shareInfo ? getDeviceInfo() : null;
+      const location = shareInfo ? await getLocation() : null;
+      const templateParams = buildTemplateParams(e.target, device, location);
+      await emailjs.send(
+        "service_alvub5r",
+        "template_lsfy6ie",
+        templateParams,
+        "_32Bh6BEuVqRbRXpi",
+      );
+      alert("Message sent successfully!");
       formRef.current.reset();
       setShareInfo(false);
-    } catch (error) {
-      alert("Failed to send: " + error.text);
+    } catch (err) {
+      alert("Failed to send email.");
+      console.error(err);
     } finally {
       setIsSending(false);
     }
@@ -112,7 +111,8 @@ function Contact() {
             ទាក់ទងមកកាន់ខ្ញុំ !!!
           </h1>
           <p className="text-blue-100/80 max-w-2xl mx-auto text-lg">
-            Have a question or want to work together? We'd love to hear from you.
+            Have a question or want to work together? We'd love to hear from
+            you.
           </p>
         </div>
 
@@ -143,16 +143,36 @@ function Contact() {
             </div>
 
             <div className="flex justify-around bg-[#06204a]/80 border border-white/10 shadow-2xl rounded-2xl p-6 text-3xl">
-              <a href="https://web.facebook.com/visethsopheach" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400 transition-colors">
+              <a
+                href="https://web.facebook.com/visethsopheach"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-blue-400 transition-colors"
+              >
                 <FaFacebookSquare />
               </a>
-              <a href="https://www.instagram.com/viseth_sopheach/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-pink-400 transition-colors">
+              <a
+                href="https://www.instagram.com/viseth_sopheach/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-pink-400 transition-colors"
+              >
                 <FaInstagramSquare />
               </a>
-              <a href="https://t.me/Viseth_Sopheach" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors">
+              <a
+                href="https://t.me/Viseth_Sopheach"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-blue-300 transition-colors"
+              >
                 <FaTelegram />
               </a>
-              <a href="https://x.com/VisethSopheach" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-400 transition-colors">
+              <a
+                href="https://x.com/VisethSopheach"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-400 transition-colors"
+              >
                 <FaSquareXTwitter />
               </a>
             </div>
@@ -162,7 +182,9 @@ function Contact() {
             <div onSubmit={sendEmail} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Name</label>
+                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                    Name
+                  </label>
                   <input
                     name="user_name"
                     required
@@ -172,7 +194,9 @@ function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Email</label>
+                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                    Email
+                  </label>
                   <input
                     name="user_email"
                     required
@@ -183,7 +207,9 @@ function Contact() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Subject</label>
+                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                  Subject
+                </label>
                 <input
                   name="subject"
                   type="text"
@@ -192,7 +218,9 @@ function Contact() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Message</label>
+                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                  Message
+                </label>
                 <textarea
                   name="message"
                   required
@@ -201,7 +229,7 @@ function Contact() {
                   placeholder="Tell us more about your project..."
                 ></textarea>
               </div>
-              
+
               <div className="bg-white/5 border border-white/20 rounded-xl p-5">
                 <label className="flex items-start gap-3 cursor-pointer group">
                   <input
@@ -212,10 +240,12 @@ function Contact() {
                   />
                   <div>
                     <span className="text-white font-semibold group-hover:text-blue-300 transition-colors">
-                      Share my device and location information
+                      Share my device type and location information
                     </span>
                     <p className="text-xs text-blue-100/60 mt-1">
-                      This helps us provide better support and detect potential issues. Includes: browser type, OS, screen resolution, and approximate location.
+                      This helps us provide better support and detect potential
+                      issues. Includes: browser type, OS, screen resolution, and
+                      approximate location.
                     </p>
                   </div>
                 </label>
@@ -224,7 +254,10 @@ function Contact() {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  sendEmail({ target: formRef.current, preventDefault: () => {} });
+                  sendEmail({
+                    target: formRef.current,
+                    preventDefault: () => {},
+                  });
                 }}
                 disabled={isSending}
                 className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-900/20 transform active:scale-[0.98] transition-all duration-200 disabled:opacity-50"
@@ -239,4 +272,4 @@ function Contact() {
   );
 }
 
-export default Contact
+export default Contact;
