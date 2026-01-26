@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import {
@@ -15,24 +15,100 @@ function Contact() {
   const form = useRef();
   const [isSending, setIsSending] = useState(false);
 
-  const sendEmail = (e) => {
+  // Get device information
+  const getDeviceInfo = () => {
+    const userAgent = navigator.userAgent;
+    let browserName = "Unknown";
+    let osName = "Unknown";
+
+    // Detect browser
+    if (userAgent.indexOf("Firefox") > -1) browserName = "Firefox";
+    else if (userAgent.indexOf("Chrome") > -1) browserName = "Chrome";
+    else if (userAgent.indexOf("Safari") > -1) browserName = "Safari";
+    else if (userAgent.indexOf("Edge") > -1) browserName = "Edge";
+
+    // Detect OS
+    if (userAgent.indexOf("Win") > -1) osName = "Windows";
+    else if (userAgent.indexOf("Mac") > -1) osName = "MacOS";
+    else if (userAgent.indexOf("Linux") > -1) osName = "Linux";
+    else if (userAgent.indexOf("Android") > -1) osName = "Android";
+    else if (userAgent.indexOf("iOS") > -1) osName = "iOS";
+
+    return {
+      browser: browserName,
+      os: osName,
+      screenResolution: `${window.screen.width}x${window.screen.height}`,
+      language: navigator.language,
+      userAgent: userAgent,
+    };
+  };
+
+  // Get location using geolocation API
+  const getLocation = () => {
+    return new Promise((resolve) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            resolve({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy,
+            });
+          },
+          (error) => {
+            console.log("Location error:", error);
+            resolve({ error: "Location access denied or unavailable" });
+          },
+        );
+      } else {
+        resolve({ error: "Geolocation not supported" });
+      }
+    });
+  };
+
+  const sendEmail = async (e) => {
     e.preventDefault();
     setIsSending(true);
 
-    const SERVICE_ID = "service_alvub5r";
-    const TEMPLATE_ID = "template_lsfy6ie";
-    const PUBLIC_KEY = "_32Bh6BEuVqRbRXpi";
+    try {
+      // Get device info
+      const deviceInfo = getDeviceInfo();
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-      .then((result) => {
-          alert("Message sent to visethsopheach@gmail.com successfully!");
-          form.current.reset();
-      }, (error) => {
-          alert("Failed to send: " + error.text);
-      })
-      .finally(() => {
-          setIsSending(false);
-      });
+      // Get location
+      const locationInfo = await getLocation();
+
+      const SERVICE_ID = "service_alvub5r";
+      const TEMPLATE_ID = "template_lsfy6ie";
+      const PUBLIC_KEY = "_32Bh6BEuVqRbRXpi";
+
+      // Prepare template parameters with additional info
+      const templateParams = {
+        user_name: form.current.user_name.value,
+        user_email: form.current.user_email.value,
+        subject: form.current.subject.value,
+        message: form.current.message.value,
+        device_info: `Browser: ${deviceInfo.browser}, OS: ${deviceInfo.os}, Screen: ${deviceInfo.screenResolution}, Language: ${deviceInfo.language}`,
+        location_info: locationInfo.error
+          ? locationInfo.error
+          : `Lat: ${locationInfo.latitude}, Lng: ${locationInfo.longitude}, Accuracy: ${locationInfo.accuracy}m`,
+        user_agent: deviceInfo.userAgent,
+        timestamp: new Date().toLocaleString(),
+      };
+
+      const result = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY,
+      );
+
+      alert("Message sent to visethsopheach@gmail.com successfully!");
+      form.current.reset();
+    } catch (error) {
+      alert("Failed to send: " + error.text);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -43,7 +119,8 @@ function Contact() {
             ទាក់ទងមកកាន់ខ្ញុំ !!!
           </h1>
           <p className="text-blue-100/80 max-w-2xl mx-auto text-lg">
-            Have a question or want to work together? We'd love to hear from you.
+            Have a question or want to work together? We'd love to hear from
+            you.
           </p>
         </div>
 
@@ -74,10 +151,34 @@ function Contact() {
             </div>
 
             <div className="flex justify-around bg-[#06204a]/80 border border-white/10 shadow-2xl rounded-2xl p-6 text-3xl">
-              <Link to="https://web.facebook.com/visethsopheach" target="_blank" className="text-white hover:text-blue-400 transition-colors"><FaFacebookSquare /></Link>
-              <Link to="https://www.instagram.com/viseth_sopheach/" target="_blank" className="text-white hover:text-pink-400 transition-colors"><FaInstagramSquare /></Link>
-              <Link to="https://t.me/Viseth_Sopheach" target="_blank" className="text-white hover:text-blue-300 transition-colors"><FaTelegram /></Link>
-              <Link to="https://x.com/VisethSopheach" target="_blank" className="text-white hover:text-gray-400 transition-colors"><FaSquareXTwitter /></Link>
+              <Link
+                to="https://web.facebook.com/visethsopheach"
+                target="_blank"
+                className="text-white hover:text-blue-400 transition-colors"
+              >
+                <FaFacebookSquare />
+              </Link>
+              <Link
+                to="https://www.instagram.com/viseth_sopheach/"
+                target="_blank"
+                className="text-white hover:text-pink-400 transition-colors"
+              >
+                <FaInstagramSquare />
+              </Link>
+              <Link
+                to="https://t.me/Viseth_Sopheach"
+                target="_blank"
+                className="text-white hover:text-blue-300 transition-colors"
+              >
+                <FaTelegram />
+              </Link>
+              <Link
+                to="https://x.com/VisethSopheach"
+                target="_blank"
+                className="text-white hover:text-gray-400 transition-colors"
+              >
+                <FaSquareXTwitter />
+              </Link>
             </div>
           </div>
 
@@ -85,7 +186,9 @@ function Contact() {
             <form ref={form} onSubmit={sendEmail} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Name</label>
+                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                    Name
+                  </label>
                   <input
                     name="user_name"
                     required
@@ -95,7 +198,9 @@ function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Email</label>
+                  <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                    Email
+                  </label>
                   <input
                     name="user_email"
                     required
@@ -106,7 +211,9 @@ function Contact() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Subject</label>
+                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                  Subject
+                </label>
                 <input
                   name="subject"
                   type="text"
@@ -115,7 +222,9 @@ function Contact() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">Message</label>
+                <label className="block text-sm font-semibold text-blue-100/80 mb-2 ml-1">
+                  Message
+                </label>
                 <textarea
                   name="message"
                   required
@@ -124,6 +233,10 @@ function Contact() {
                   placeholder="Tell us more about your project..."
                 ></textarea>
               </div>
+              <p className="text-xs text-blue-100/50 italic">
+                By submitting, you agree to share your device and location
+                information for security purposes.
+              </p>
               <button
                 type="submit"
                 disabled={isSending}
