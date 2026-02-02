@@ -88,7 +88,7 @@ const Home = () => {
           degree in Computer Science.
         </p>
 
-        <div className="pt-10 flex gap-10">
+        <div className="pt-10 flex justify-center md:justify-start gap-6">
           <button
             onClick={requestToViseth}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
@@ -96,12 +96,12 @@ const Home = () => {
             REQUEST MY CV <FaEye />
           </button>
 
-          <button
+          {/* <button
             onClick={requestToViseth}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-2 items-center text-white bg-green-400 hover:bg-orange-500 transition rounded-lg p-2"
           >
-            REQUEST DOWNLOAD <IoMdDownload />
-          </button>
+            REQUEST DOWNLOAD CV<IoMdDownload />
+          </button> */}
         </div>
 
         {/* <div className="pt-10 flex gap-10">
