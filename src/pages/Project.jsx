@@ -35,6 +35,9 @@ const projects = [
   },
 ];
 
+const totalProjects = projects.length;
+console.log(totalProjects);
+
 const Project = () => {
   return (
     <div className="pb-10 pt-25 px-4 sm:px-6 md:px-10 min-h-screen bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a]">
@@ -42,7 +45,7 @@ const Project = () => {
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-white mb-4">My Projects</h1>
           <p className="text-gray-400 text-lg">
-            Work I have recently completed
+            Recent work I have completed. I have finished {totalProjects} projects.
           </p>
         </div>
 
