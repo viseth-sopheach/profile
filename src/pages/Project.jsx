@@ -2,6 +2,7 @@ import { GiClick } from "react-icons/gi";
 import qr from "../assets/qrcode.png";
 import book from "../assets/bIcon.png";
 import apple from "../assets/apple.png";
+import stock from "../assets/stock.png";
 
 const projects = [
   {
@@ -9,7 +10,7 @@ const projects = [
     image: book,
     title: "BookShop Site",
     link: "https://book-one-sage.vercel.app/",
-    color: "bg-purple-600",
+    color: "bg-blue-600",
   },
   {
     id: 2,
@@ -23,6 +24,13 @@ const projects = [
     image: apple,
     title: "Phone Shop",
     link: "https://phoneshop-woad.vercel.app/",
+    color: "bg-blue-600",
+  },
+  {
+    id: 4,
+    image: stock,
+    title: "Stock Market",
+    link: "https://stock-chi-lovat.vercel.app/",
     color: "bg-blue-600",
   },
 ];
@@ -43,9 +51,9 @@ const Project = () => {
             <div
               key={project.id}
               onClick={() => window.open(project.link, "_blank")}
-              className="group relative bg-gray-800 rounded-xl p-4 transform transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-gray-600 flex flex-col items-center"
+              className="group relative bg-gray-900 rounded-xl p-4 transform transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-gray-600 flex flex-col items-center"
             >
-              <div className="w-full h-40 bg-gray-900 rounded-lg flex items-center justify-center overflow-hidden mb-4">
+              <div className="w-full h-40 bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden mb-4">
                 <img
                   src={project.image}
                   alt={project.title}
