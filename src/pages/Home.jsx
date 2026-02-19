@@ -93,7 +93,7 @@ const Home = () => {
             onClick={requestToViseth}
             className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
           >
-            REQUEST MY CV <FaEye />
+            REQUEST ... <FaEye />
           </button>
 
           {/* <button

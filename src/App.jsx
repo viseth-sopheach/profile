@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 import Education from "./pages/Education";
@@ -7,6 +8,23 @@ import Project from "./pages/Project";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
+  // useEffect(() => {
+  //   const sendEmail = async () => {
+  //     try {
+  //       let res = await fetch("/api/send-email", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //       });
+  //       const data = await res.json();
+  //       console.log("Email status:", data);
+  //     } catch (error) {
+  //       console.error("Fetch error:", error);
+  //     }
+  //   };
+
+  //   sendEmail();
+  // }, []); // The empty array [] ensures this only runs ONCE when the app loads
+
   const routes = [
     {
       path: "/",
