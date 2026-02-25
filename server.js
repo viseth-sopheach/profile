@@ -59,40 +59,50 @@
 
 // server.js
 // server.js
-import express from 'express';
-import nodemailer from 'nodemailer';
-import cors from 'cors';
-import dotenv from 'dotenv';
 
-dotenv.config();
+//================
+
+
+const express = require("express");
+const nodemailer = require("nodemailer");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-app.post('/send-email', async (req, res) => {
-  console.log('→ POST /send-email received');
-  console.log('Body:', req.body);                    // ← see what frontend sent
-  console.log('EMAIL_USER:', process.env.EMAIL_USER); // ← check if loaded
-  console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '***exists***' : 'MISSING');
-  console.log('RECIPIENT_EMAIL:', process.env.RECIPIENT_EMAIL);
-
-  const { user_name, user_email, subject, message, device_info, location_info, timestamp } = req.body;
-
+app.post("/send-email", async (req, res) => {
   try {
-    // ... rest of your code ...
-  } catch (error) {
-    console.error('FULL ERROR IN /send-email:', error);
-    console.error('Error stack:', error.stack);
-    res.status(500).json({ 
-      message: 'Failed to send email', 
-      error: error.message 
+    const { user_name, user_email, subject, message } = req.body;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
     });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: "visethsopheach@gmail.com",
+      subject: subject || "New Message",
+      text: `
+Name: ${user_name}
+Email: ${user_email}
+Message: ${message}
+      `,
+    });
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(5000, () => {
+  console.log("Server running on http://localhost:5000");
 });

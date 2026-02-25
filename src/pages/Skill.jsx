@@ -7,6 +7,7 @@ import { RiTailwindCssLine } from "react-icons/ri";
 import { FaReact } from "react-icons/fa";
 import { FaVuejs } from "react-icons/fa";
 import { FaJava } from "react-icons/fa6";
+import { FaPhp } from "react-icons/fa";
 
 const Skill = () => {
   const skills = [
@@ -18,6 +19,7 @@ const Skill = () => {
     { name: "React JS", icon: <FaReact />, color: "bg-blue-400" },
     { name: "Vue JS", icon: <FaVuejs />, color: "bg-green-500" },
     { name: "Java", icon: <FaJava />, color: "bg-gray-200" },
+    { name: "Php", icon: <FaPhp />, color: "bg-gray-200" },
   ];
 
   return (
