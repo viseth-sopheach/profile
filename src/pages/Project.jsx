@@ -3,6 +3,7 @@ import qr from "../assets/qrcode.png";
 import book from "../assets/bIcon.png";
 import apple from "../assets/apple.png";
 import stock from "../assets/stock.png";
+import download from "../assets/download.png";
 
 const projects = [
   {
@@ -33,6 +34,13 @@ const projects = [
     link: "https://stock-chi-lovat.vercel.app/",
     color: "bg-blue-600",
   },
+  {
+    id: 5,
+    image: download,
+    title: "Video Downloader",
+    link: "https://video-downloader-o6un.onrender.com/",
+    color: "bg-blue-600",
+  },
 ];
 
 const totalProjects = projects.length;
@@ -56,7 +64,7 @@ const Project = () => {
               onClick={() => window.open(project.link, "_blank")}
               className="group relative bg-gray-900 rounded-xl p-4 transform transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-gray-600 flex flex-col items-center"
             >
-              <div className="w-full h-40 bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden mb-4">
+              <div className="w-full h-40 bg-gray-500 rounded-lg flex items-center justify-center overflow-hidden mb-4">
                 <img
                   src={project.image}
                   alt={project.title}
