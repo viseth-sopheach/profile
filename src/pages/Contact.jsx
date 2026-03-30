@@ -93,7 +93,7 @@ function Contact() {
       const location = shareInfo ? await getLocation() : null;
       const templateParams = buildTemplateParams(formRef.current, device, location);
 
-      const response = await fetch("/send-email", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(templateParams),
@@ -102,7 +102,7 @@ function Contact() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to send message.");
+        throw new Error(data.details || data.error || "Failed to send message.");
       }
 
       setStatusType("success");
