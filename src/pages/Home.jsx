@@ -11,7 +11,7 @@ const Home = () => {
   const [showCV, setShowCV] = useState(false);
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const fullText = "I am a front-end developer";
+  const fullText = "I am a Full Stack Web Developer";
 
   const sideIcons = [
     { name: "React", icon: <FaReact className="h-7 w-7 text-cyan-300" /> },
