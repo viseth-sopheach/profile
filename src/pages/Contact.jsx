@@ -1,21 +1,20 @@
 import { useRef, useState } from "react";
 import {
+  FaEnvelope,
   FaFacebookSquare,
   FaInstagramSquare,
-  FaTelegram,
-  FaEnvelope,
   FaPhoneAlt,
+  FaTelegram,
 } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 
 function Contact() {
-  console.log(import.meta.env.VITE_API_URL);
-
   const formRef = useRef();
   const [isSending, setIsSending] = useState(false);
   const [shareInfo, setShareInfo] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState("idle");
 
-  // ---------------- Device Info ----------------
   const getDeviceInfo = () => {
     const ua = navigator.userAgent;
 
@@ -49,7 +48,6 @@ function Contact() {
     };
   };
 
-  // ---------------- Location ----------------
   const getLocation = (timeout = 8000) => {
     return new Promise((resolve) => {
       if (!navigator.geolocation) {
@@ -70,7 +68,6 @@ function Contact() {
     });
   };
 
-  // ---------------- Build Data ----------------
   const buildTemplateParams = (form, device, location) => ({
     user_name: form.user_name.value,
     user_email: form.user_email.value,
@@ -80,140 +77,142 @@ function Contact() {
       ? `Browser: ${device.browser}, OS: ${device.os}, Screen: ${device.screen}, Lang: ${device.language}`
       : "Not shared",
     location_info: location
-      ? location.error ||
-        `Lat: ${location.lat}, Lng: ${location.lng}, ±${location.accuracy}m`
+      ? location.error || `Lat: ${location.lat}, Lng: ${location.lng}, ±${location.accuracy}m`
       : "Not shared",
     timestamp: new Date().toLocaleString(),
   });
 
-  // Send Email
-  const sendEmail = async (e) => {
-    e.preventDefault();
+  const sendEmail = async (event) => {
+    event.preventDefault();
     setIsSending(true);
+    setStatusMessage("");
+    setStatusType("idle");
 
     try {
       const device = shareInfo ? getDeviceInfo() : null;
       const location = shareInfo ? await getLocation() : null;
+      const templateParams = buildTemplateParams(formRef.current, device, location);
 
-      const templateParams = buildTemplateParams(
-        formRef.current,
-        device,
-        location,
-      );
+      const response = await fetch("/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(templateParams),
+      });
 
-      const response = await fetch(
-        "/send-email", // ← this is the key change
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(templateParams),
-        },
-      );
+      const data = await response.json().catch(() => ({}));
 
-      alert("Message sent successfully!");
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message.");
+      }
+
+      setStatusType("success");
+      setStatusMessage(data.message || "Message sent successfully!");
       formRef.current.reset();
       setShareInfo(false);
     } catch (error) {
       console.error(error);
-      alert("Failed to send email.");
+      setStatusType("error");
+      setStatusMessage(error.message || "Failed to send message.");
     } finally {
       setIsSending(false);
     }
   };
 
   return (
-    <div className="pt-24 md:pt-16 bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a] min-h-screen">
-      <div className="container mx-auto px-6 py-12">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
-            ទាក់ទងមកកាន់ខ្ញុំ !!!
-          </h1>
-          <p className="text-blue-100/80 max-w-2xl mx-auto text-lg">
-            Have a question or want to work together? We'd love to hear from
-            you.
+    <section className="section-shell">
+      <div className="content-wrap">
+        <header className="mb-10">
+          <h1 className="section-title">ទាក់ទងមកកាន់ខ្ញុំ !!!</h1>
+          <p className="section-subtitle">
+            Have a question or want to work together? We'd love to hear from you.
           </p>
-        </div>
+        </header>
 
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
-          {/* Left Info */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="group bg-[#06204a]/50 backdrop-blur-sm border border-white/10 shadow-xl rounded-2xl p-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-                  <FaEnvelope size={20} />
+        <div className="grid gap-6 lg:grid-cols-5">
+          <aside className="space-y-4 lg:col-span-2">
+            <div className="glass-card rounded-2xl p-5">
+              <div className="flex items-center gap-3">
+                <div className="rounded-xl bg-cyan-400/15 p-3 text-cyan-300">
+                  <FaEnvelope size={18} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1">Email</h3>
-                  <p className="text-blue-100/70">visethXXX@gmail.com</p>
+                  <p className="text-sm text-slate-400">Email</p>
+                  <p className="font-semibold text-slate-100">visethXXX@gmail.com</p>
                 </div>
               </div>
             </div>
 
-            <div className="group bg-[#06204a]/50 backdrop-blur-sm border border-white/10 shadow-xl rounded-2xl p-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg text-blue-400">
-                  <FaPhoneAlt size={20} />
+            <div className="glass-card rounded-2xl p-5">
+              <div className="flex items-center gap-3">
+                <div className="rounded-xl bg-emerald-400/15 p-3 text-emerald-300">
+                  <FaPhoneAlt size={18} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1">Phone</h3>
-                  <p className="text-blue-100/70">(885) 123-4567</p>
+                  <p className="text-sm text-slate-400">Phone</p>
+                  <p className="font-semibold text-slate-100">(885) 123-4567</p>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-around bg-[#06204a]/80 border border-white/10 shadow-2xl rounded-2xl p-6 text-3xl">
-              <a
-                href="https://web.facebook.com/visethsopheach"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-blue-400"
-              >
-                <FaFacebookSquare />
-              </a>
-              <a
-                href="https://www.instagram.com/viseth_sopheach/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-pink-400"
-              >
-                <FaInstagramSquare />
-              </a>
-              <a
-                href="https://t.me/Viseth_Sopheach"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-blue-300"
-              >
-                <FaTelegram />
-              </a>
-              <a
-                href="https://x.com/VisethSopheach"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-gray-400"
-              >
-                <FaSquareXTwitter />
-              </a>
+            <div className="glass-card rounded-2xl p-5">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-300">Social</p>
+              <div className="flex justify-between text-3xl text-slate-200">
+                <a
+                  href="https://web.facebook.com/visethsopheach"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-blue-300"
+                  aria-label="Facebook"
+                >
+                  <FaFacebookSquare />
+                </a>
+                <a
+                  href="https://www.instagram.com/viseth_sopheach/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-pink-300"
+                  aria-label="Instagram"
+                >
+                  <FaInstagramSquare />
+                </a>
+                <a
+                  href="https://t.me/Viseth_Sopheach"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-cyan-300"
+                  aria-label="Telegram"
+                >
+                  <FaTelegram />
+                </a>
+                <a
+                  href="https://x.com/VisethSopheach"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-slate-400"
+                  aria-label="X"
+                >
+                  <FaSquareXTwitter />
+                </a>
+              </div>
             </div>
-          </div>
+          </aside>
 
-          {/* Right Form */}
-          <div className="lg:col-span-3 bg-[#06204a]/40 backdrop-blur-md border border-white/10 shadow-2xl rounded-3xl p-8 md:p-10">
-            <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
+          <div className="glass-card rounded-3xl p-6 sm:p-8 lg:col-span-3">
+            <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <input
                   name="user_name"
                   required
                   type="text"
                   placeholder="Your name"
-                  className="w-full px-5 py-3 bg-white/5 border border-white/20 rounded-xl text-white"
+                  className="rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
                 />
                 <input
                   name="user_email"
                   required
                   type="email"
                   placeholder="your@email.com"
-                  className="w-full px-5 py-3 bg-white/5 border border-white/20 rounded-xl text-white"
+                  className="rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
                 />
               </div>
 
@@ -221,22 +220,23 @@ function Contact() {
                 name="subject"
                 type="text"
                 placeholder="Subject"
-                className="w-full px-5 py-3 bg-white/5 border border-white/20 rounded-xl text-white"
+                className="w-full rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
               />
 
               <textarea
                 name="message"
                 required
-                rows={5}
+                rows={6}
                 placeholder="Tell us more..."
-                className="w-full px-5 py-3 bg-white/5 border border-white/20 rounded-xl text-white resize-none"
+                className="w-full resize-none rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
               />
 
-              <label className="flex items-center gap-3 text-white">
+              <label className="flex items-center gap-2 text-sm text-slate-300">
                 <input
                   type="checkbox"
                   checked={shareInfo}
-                  onChange={(e) => setShareInfo(e.target.checked)}
+                  onChange={(event) => setShareInfo(event.target.checked)}
+                  className="h-4 w-4 accent-cyan-400"
                 />
                 Share device & location info
               </label>
@@ -244,15 +244,25 @@ function Contact() {
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl disabled:opacity-50"
+                className="w-full rounded-xl bg-cyan-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSending ? "Sending..." : "Send Message"}
               </button>
+
+              {statusMessage && (
+                <p
+                  className={`text-sm ${
+                    statusType === "success" ? "text-emerald-300" : "text-rose-300"
+                  }`}
+                >
+                  {statusMessage}
+                </p>
+              )}
             </form>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

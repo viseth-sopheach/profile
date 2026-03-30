@@ -1,104 +1,108 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
+
+const navItems = [
+  { path: "/", label: "Home" },
+  { path: "/education", label: "Education nad Certificate" },
+  { path: "/skill", label: "Skill" },
+  { path: "/project", label: "Project" },
+  { path: "/contact", label: "Contact Me" },
+];
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 bg-[#140e38] px-10 py-5 z-30">
-        <div className="flex items-center justify-between">
-          <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] transition-all duration-300">
-            Sopheach Viseth
-          </h1>
-
-          {/* Menu button - only visible on mobile */}
-          <button
-            className="sm:hidden text-2xl font-bold text-white z-50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-700/50 bg-slate-950/75 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 w-[min(1200px,100%-2rem)] items-center justify-between lg:w-[min(1200px,100%-4rem)]">
+          <NavLink
+            to="/"
+            onClick={() => setIsMenuOpen(false)}
+            className="font-display text-lg font-bold tracking-tight text-slate-50 transition hover:text-cyan-300 sm:text-xl"
           >
-            ☰
+            Sopheach Viseth
+          </NavLink>
+
+          <button
+            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700 bg-slate-900 text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300 sm:hidden"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <HiX className="text-2xl" /> : <HiMenuAlt3 className="text-2xl" />}
           </button>
 
-          {/* Desktop menu - hidden on mobile */}
-          <ul className="hidden sm:flex gap-2 lg:gap-4 font-bold">
-            {["/", "/education", "/skill", "/project", "/contact"].map(
-              (path, index) => {
-                const name = [
-                  "Home",
-                  "Education nad Certificate",
-                  "Skill",
-                  "Project",
-                  "Contact Me",
-                ];
-                return (
-                  <li key={path}>
-                    <NavLink to={path}>
-                      <button className="bg-purple-950 rounded-lg px-3 py-2 lg:px-4 lg:py-3 text-white text-sm lg:text-base whitespace-nowrap hover:bg-orange-500 transition-colors">
-                        {name[index]}
-                      </button>
-                    </NavLink>
-                  </li>
-                );
-              }
-            )}
+          <ul className="hidden items-center gap-2 sm:flex">
+            {navItems.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    [
+                      "rounded-xl px-4 py-2 text-sm font-semibold tracking-wide transition duration-200",
+                      isActive
+                        ? "bg-cyan-400/20 text-cyan-300 ring-1 ring-cyan-400/60"
+                        : "text-slate-200 hover:bg-slate-800 hover:text-white",
+                    ].join(" ")
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
 
-      {/* Overlay - only on mobile */}
       {isMenuOpen && (
-        <div className="sm:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300" />
+        <button
+          type="button"
+          className="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm sm:hidden"
+          onClick={() => setIsMenuOpen(false)}
+          aria-label="Close menu overlay"
+        />
       )}
 
-      {/* Mobile off-canvas menu - slides from left */}
-      <div
-        className={`sm:hidden fixed top-0 left-0 h-full w-55 bg-blue-900 z-50 transform transition-transform duration-300 ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+      <aside
+        className={[
+          "fixed right-0 top-0 z-50 h-screen w-[min(18rem,calc(100vw-1rem))] border-l border-slate-700 bg-slate-950/95 p-4 pt-5 transition-transform duration-300 sm:hidden sm:p-6",
+          isMenuOpen ? "translate-x-0" : "translate-x-full",
+        ].join(" ")}
       >
-        {/* Close button */}
-        <div className="flex items-center justify-between p-5 border-b border-blue-700">
-          <h1 className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 text-white text-lg font-bold">
-            Sopheach Viseth
-          </h1>
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="font-display text-lg font-bold text-white">Navigation</h2>
           <button
-            className="text-white text-2xl font-bold hover:bg-red-800 rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300"
             onClick={() => setIsMenuOpen(false)}
             aria-label="Close menu"
           >
-            ✕
+            <HiX className="text-xl" />
           </button>
         </div>
 
-        {/* Menu items */}
-        <ul className="flex flex-col gap-4 px-5 pt-2 font-bold">
-          {["/", "/education", "/skill", "/project", "/contact"].map(
-            (path, i) => {
-              const name = [
-                "Home",
-                "Education nad Certificate",
-                "Skill",
-                "Project",
-                "Contact Me",
-              ];
-              return (
-                <li key={path}>
-                  <NavLink
-                    to={path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block"
-                  >
-                    <button className="bg-purple-950 rounded-lg px-4 py-3 text-white hover:bg-orange-500 transition-colors w-full text-left">
-                      {name[i]}
-                    </button>
-                  </NavLink>
-                </li>
-              );
-            }
-          )}
+        <ul className="space-y-3">
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <NavLink
+                to={item.path}
+                onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  [
+                    "block rounded-xl px-4 py-3 text-sm font-semibold transition",
+                    isActive
+                      ? "bg-cyan-400/20 text-cyan-300 ring-1 ring-cyan-400/50"
+                      : "bg-slate-900 text-slate-100 hover:bg-slate-800",
+                  ].join(" ")
+                }
+              >
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
-      </div>
+      </aside>
     </>
   );
 }

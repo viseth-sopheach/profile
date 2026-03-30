@@ -1,18 +1,11 @@
-import React, { useState } from "react";
-import { FaEye } from "react-icons/fa";
-import { IoMdDownload } from "react-icons/io";
-import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
-import cv from "../assets/cv.png";
-import img from "../assets/seth.png";
-import { FaReact } from "react-icons/fa";
-import { RiTailwindCssLine } from "react-icons/ri";
-import { FaBootstrap } from "react-icons/fa";
-import { FaCss3 } from "react-icons/fa";
-import { FaHtml5 } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { FaBootstrap, FaCss3, FaEye, FaHtml5, FaReact, FaVuejs } from "react-icons/fa";
 import { FaJava } from "react-icons/fa6";
-import { FaVuejs } from "react-icons/fa";
+import { FaPhp } from "react-icons/fa6";
+import { IoLogoJavascript, IoMdDownload } from "react-icons/io";
+import { RiTailwindCssLine } from "react-icons/ri";
+import cv from "../assets/cv.png";
+import profileImage from "../assets/seth.png";
 
 const Home = () => {
   const [showCV, setShowCV] = useState(false);
@@ -21,22 +14,23 @@ const Home = () => {
   const fullText = "I am a front-end developer";
 
   const sideIcons = [
-    { icon: <FaReact className="text-cyan-400 w-12 h-12" /> },
-    { icon: <RiTailwindCssLine className="text-sky-400 w-12 h-12" /> },
-    { icon: <FaJava className="text-sky-200 w-12 h-12" /> },
-    { icon: <FaVuejs className="text-sky-200 w-12 h-12" /> },
+    { name: "React", icon: <FaReact className="h-7 w-7 text-cyan-300" /> },
+    { name: "Tailwind", icon: <RiTailwindCssLine className="h-7 w-7 text-sky-300" /> },
+    { name: "Java", icon: <FaJava className="h-7 w-7 text-orange-300" /> },
+    { name: "Vue", icon: <FaVuejs className="h-7 w-7 text-emerald-300" /> },
+    { name: "Php", icon: <FaPhp className="h-7 w-7 text-blue-500" /> },
   ];
 
   const bottomIcons = [
-    { icon: <FaHtml5 className="text-orange-500 w-12 h-12" /> },
-    { icon: <FaCss3 className="text-blue-500 w-12 h-12" /> },
-    { icon: <IoLogoJavascript className="text-yellow-400 w-12 h-12" /> },
-    { icon: <FaBootstrap className="text-purple-500 w-12 h-12" /> },
+    { name: "HTML", icon: <FaHtml5 className="h-7 w-7 text-orange-400" /> },
+    { name: "CSS", icon: <FaCss3 className="h-7 w-7 text-blue-400" /> },
+    { name: "JavaScript", icon: <IoLogoJavascript className="h-7 w-7 text-yellow-400" /> },
+    { name: "Bootstrap", icon: <FaBootstrap className="h-7 w-7 text-purple-400" /> },
   ];
 
   useEffect(() => {
-    const typingSpeed = isDeleting ? 50 : 100;
-    const pauseEnd = 2000;
+    const typingSpeed = isDeleting ? 35 : 75;
+    const pauseEnd = 1800;
 
     const timer = setTimeout(() => {
       if (!isDeleting && text === fullText) {
@@ -55,10 +49,10 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting]);
 
-  const download = () => {
+  const downloadCv = () => {
     const link = document.createElement("a");
     link.href = cv;
-    link.download = "Viseth.png";
+    link.download = "Viseth-CV.png";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -69,91 +63,119 @@ const Home = () => {
   };
 
   return (
-    <div className="pt-20 md:pt-16 flex flex-col md:flex-row bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a] min-h-screen">
-      <div className="w-full md:w-1/2 px-6 sm:px-10 md:px-20 py-8 flex flex-col justify-center">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white pb-2">
-          Welcome to my portfolio
-        </h1>
-        <h1 className="pt-6 text-lg sm:text-xl md:text-2xl text-white pb-2">
-          ខ្ញុំបាទឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២
-          នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ ដេប៉ាតាម៉ង់ Computer Science
-        </h1>
-        <h1 className="pt-6 text-2xl md:text-3xl font-bold text-white pb-2">
-          {text}
-          <span className="animate-pulse">|</span>
-        </h1>
-        <p className="pt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-white leading-relaxed">
-          My goal is to become a full-stack developer specializing in web and
-          mobile applications, while building a professional career with a
-          degree in Computer Science.
-        </p>
+    <section className="section-shell soft-grid">
+      <div className="content-wrap grid grid-cols-1 gap-6 md:gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:items-center">
+        <div className="relative min-w-0 glow-dot teal space-y-6 rounded-3xl border border-slate-700/70 bg-slate-900/55 p-6 shadow-2xl backdrop-blur-md sm:p-9">
+          <p className="inline-flex items-center rounded-full border border-cyan-300/40 bg-cyan-400/10 px-3 py-1 text-xs font-semibold tracking-wide text-cyan-200">
+            Full Stack Web Developer
+          </p>
 
-        <div className="pt-10 flex justify-center md:justify-start gap-6">
-          {/* <button
-            onClick={requestToViseth}
-            className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
-          >
-            REQUEST ... <FaEye />
-          </button> */}
+          <h1 className="text-3xl font-extrabold leading-tight text-slate-50 sm:text-4xl lg:text-5xl">
+            Welcome to my portfolio
+          </h1>
 
-          {/* <button
-            onClick={requestToViseth}
-            className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-2 items-center text-white bg-green-400 hover:bg-orange-500 transition rounded-lg p-2"
-          >
-            REQUEST DOWNLOAD CV<IoMdDownload />
-          </button> */}
-        </div>
+          <p className="max-w-full wrap-anywhere text-base leading-relaxed text-slate-300 sm:text-lg">
+            ខ្ញុំបានឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២ នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ ដេប៉ាតាំង Computer Science
+          </p>
 
-        {/* <div className="pt-10 flex gap-10">
-          <button
-            onClick={() => setShowCV(true)}
-            className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-4 items-center text-white bg-green-500 hover:bg-orange-500 transition rounded-lg p-2"
-          >
-            VIEW MY CV <FaEye />
-          </button>
-          <button
-            onClick={download}
-            className="hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] duration-300 flex gap-2 items-center text-white bg-green-400 hover:bg-orange-500 transition rounded-lg p-2"
-          >
-            DOWNLOAD MY CV <IoMdDownload />
-          </button>
-        </div> */}
-      </div>
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-center py-8">
-        <div className="flex items-end">
-          <div className="p-2 flex flex-col gap-5 items-end">
-            {sideIcons.map((item, index) => (
-              <div key={index}>{item.icon}</div>
-            ))}
-          </div>
-          <img className="w-64 rounded-xl shadow-lg" src={img} alt="Profile" />
-        </div>
-        <div className="flex gap-4 pt-4 ml-13">
-          {bottomIcons.map((item, index) => (
-            <div key={index}>{item.icon}</div>
-          ))}
-        </div>
-      </div>
-      {showCV && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="relative bg-[#1b0227] rounded-xl shadow-2xl max-w-5xl w-full mx-4 p-6">
+          <h2 className="min-h-14 text-xl font-bold text-slate-100 sm:text-2xl">
+            {text}
+            <span className="ml-1 animate-pulse text-cyan-300">|</span>
+          </h2>
+
+          <p className="max-w-2xl wrap-anywhere text-sm leading-relaxed text-slate-300 sm:text-base">
+            My goal is to become a full-stack developer specializing in web and mobile applications,
+            while building a professional career with a degree in Computer Science.
+          </p>
+
+          <div className="flex flex-wrap gap-2.5 pt-2 sm:gap-3">
             <button
+              type="button"
+              onClick={requestToViseth}
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400 max-[420px]:w-full max-[420px]:justify-center"
+            >
+              Contact me ...
+            </button>
+            {/* <button
+              type="button"
+              onClick={() => setShowCV(true)}
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-600 bg-slate-800/80 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-cyan-300 hover:text-cyan-200 max-[420px]:w-full max-[420px]:justify-center"
+            >
+              VIEW MY CV <FaEye className="text-base" />
+            </button>
+            <button
+              type="button"
+              onClick={downloadCv}
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-emerald-400/50 bg-emerald-500/10 px-4 py-2.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-500/20 max-[420px]:w-full max-[420px]:justify-center"
+            >
+              DOWNLOAD MY CV <IoMdDownload className="text-lg" />
+            </button> */}
+          </div>
+        </div>
+
+        <div className="relative min-w-0 glow-dot amber">
+          <div className="glass-card overflow-hidden rounded-3xl p-6 sm:p-8">
+            <div className="flex min-w-0 flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+              <div className="grid grid-cols-4 gap-2 sm:block sm:space-y-3">
+                {sideIcons.map((item, index) => (
+                  <div
+                    key={item.name}
+                    className={[
+                      "flex h-12 w-12 items-center justify-center rounded-xl border border-slate-600 bg-slate-800/80",
+                      "animate-[float_5s_ease-in-out_infinite]",
+                      index === 1 ? "delay-1" : index === 2 ? "delay-2" : "",
+                    ].join(" ")}
+                    title={item.name}
+                  >
+                    {item.icon}
+                  </div>
+                ))}
+              </div>
+
+              <img
+                className="max-w-full rounded-2xl border border-slate-600/70 object-cover shadow-2xl w-40 sm:w-56 md:w-64"
+                src={profileImage}
+                alt="Sopheach Viseth"
+              />
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {bottomIcons.map((item, index) => (
+                <div
+                  key={item.name}
+                  className={[
+                    "flex h-12 items-center justify-center rounded-xl border border-slate-600 bg-slate-800/75",
+                    "animate-[float_5s_ease-in-out_infinite]",
+                    index === 1 ? "delay-1" : index === 2 ? "delay-2" : index === 3 ? "delay-3" : "",
+                  ].join(" ")}
+                  title={item.name}
+                >
+                  {item.icon}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {showCV && (
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
+          <div className="glass-card relative w-full max-w-5xl rounded-2xl p-4 sm:p-6">
+            <button
+              type="button"
               onClick={() => setShowCV(false)}
-              className="absolute top-4 right-4 bg-red-500 hover:bg-orange-500 text-white w-9 h-9 rounded-full flex items-center justify-center text-lg font-bold"
+              className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-500 bg-slate-900 text-slate-100 transition hover:border-rose-400 hover:text-rose-300"
+              aria-label="Close CV preview"
             >
               X
             </button>
-            <div className="flex justify-center items-center max-h-[85vh] overflow-auto">
-              <img
-                src={cv}
-                alt="My CV"
-                className="max-h-[80vh] w-auto rounded-lg shadow-md object-contain"
-              />
+            <div className="max-h-[85vh] overflow-auto rounded-xl border border-slate-700 bg-slate-950 p-3">
+              <img src={cv} alt="Viseth CV" className="mx-auto h-auto max-h-[80vh] w-full max-w-4xl object-contain" />
             </div>
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

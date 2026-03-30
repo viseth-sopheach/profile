@@ -1,58 +1,61 @@
-import React from "react";
-import { FaCss3 } from "react-icons/fa";
-import { FaHtml5 } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io5";
-import { FaBootstrap } from "react-icons/fa";
-import { RiTailwindCssLine } from "react-icons/ri";
-import { FaReact } from "react-icons/fa";
-import { FaVuejs } from "react-icons/fa";
+import { FaBootstrap, FaCss3, FaHtml5, FaPhp, FaReact, FaVuejs } from "react-icons/fa";
 import { FaJava } from "react-icons/fa6";
-import { FaPhp } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io5";
+import { RiTailwindCssLine } from "react-icons/ri";
 
 const Skill = () => {
   const skills = [
-    { name: "HTML", icon: <FaHtml5 />, color: "bg-orange-500" },
-    { name: "CSS", icon: <FaCss3 />, color: "bg-blue-500" },
-    { name: "JavaScript", icon: <IoLogoJavascript />, color: "bg-yellow-500" },
-    { name: "Bootstrap", icon: <FaBootstrap />, color: "bg-purple-500" },
-    { name: "Tailwind CSS", icon: <RiTailwindCssLine />, color: "bg-cyan-500" },
-    { name: "React JS", icon: <FaReact />, color: "bg-blue-400" },
-    { name: "Vue JS", icon: <FaVuejs />, color: "bg-green-500" },
-    { name: "Java", icon: <FaJava />, color: "bg-gray-200" },
-    { name: "Php", icon: <FaPhp />, color: "bg-gray-200" },
+    { name: "HTML", icon: <FaHtml5 />, color: "text-orange-400" },
+    { name: "CSS", icon: <FaCss3 />, color: "text-blue-400" },
+    { name: "JavaScript", icon: <IoLogoJavascript />, color: "text-yellow-400" },
+    { name: "Bootstrap", icon: <FaBootstrap />, color: "text-purple-400" },
+    { name: "Tailwind CSS", icon: <RiTailwindCssLine />, color: "text-cyan-300" },
+    { name: "React JS", icon: <FaReact />, color: "text-cyan-300" },
+    { name: "Vue JS", icon: <FaVuejs />, color: "text-emerald-300" },
+    { name: "Java", icon: <FaJava />, color: "text-orange-300" },
+    { name: "Php", icon: <FaPhp />, color: "text-indigo-300" },
   ];
 
   return (
-    <div className="pb-10 pt-25 px-4 sm:px-6 md:px-10 min-h-screen bg-linear-to-r from-[#0b0217] via-[#06204a] to-[#10378a]">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">My Skills</h1>
-          <p className="text-gray-400 text-lg">Technologies I work with</p>
-        </div>
+    <section className="section-shell">
+      <div className="content-wrap space-y-10">
+        <header className="space-y-3">
+          <h1 className="section-title">My Skills</h1>
+          <p className="section-subtitle">Technologies I work with</p>
+        </header>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill, index) => (
-            <div
-              key={index}
-              className="group relative bg-gray-800 rounded-xl p-6 hover:scale-105 transform transition-all duration-300 hover:shadow-2xl cursor-pointer border border-gray-700 hover:border-gray-600"
+            <article
+              key={skill.name}
+              className={[
+                "glass-card group relative overflow-hidden rounded-3xl p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/50",
+                index % 3 === 1 ? "delay-1" : index % 3 === 2 ? "delay-2" : "",
+              ].join(" ")}
             >
-              <div className="flex flex-col items-center justify-center space-y-3">
-                <div
-                  className={`${skill.color} w-16 h-16 rounded-lg flex items-center justify-center text-3xl transform group-hover:rotate-12 transition-transform duration-300`}
-                >
-                  {skill.icon}
-                </div>
-                <h3 className="text-white font-semibold text-lg text-center">
-                  {skill.name}
-                </h3>
+              <div className="mb-5 flex items-center justify-between">
+                <div className={`text-4xl ${skill.color}`}>{skill.icon}</div>
+                {/* <span className="rounded-full border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-slate-300">
+                  {skill.level}
+                </span> */}
               </div>
 
-              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300"></div>
-            </div>
+              <h2 className="text-xl font-bold text-slate-50">{skill.name}</h2>
+              <p className="mt-2 text-sm text-slate-300">
+                Production-ready workflow, reusable components, and clean implementation.
+              </p>
+
+              {/* <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-700">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-300"
+                  style={{ width: skill.level === "Advanced" ? "88%" : "68%" }}
+                />
+              </div> */}
+            </article>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
