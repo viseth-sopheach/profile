@@ -75,7 +75,7 @@ const Home = () => {
           </h1>
 
           <p className="max-w-full wrap-anywhere text-base leading-relaxed text-slate-300 sm:text-lg">
-            ខ្ញុំបានឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២ នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ ដេប៉ាតាំង Computer Science
+            ខ្ញុំបាទឈ្មោះ សុភាជ វិសិដ្ឋ ជានិស្សិតឆ្នាំទី២ នៃសកលវិទ្យាល័យភូមិន្ទភ្នំពេញ ដេប៉ាតាម៉ង់ Computer Science
           </p>
 
           <h2 className="min-h-14 text-xl font-bold text-slate-100 sm:text-2xl">
