@@ -88,7 +88,7 @@ const Home = () => {
             >
               Contact me ...
             </button>
-            <button
+            {/* <button
               type="button"
               onClick={() => setShowCV(true)}
               className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 transition hover:border-cyan-500 hover:text-cyan-700 dark:border-slate-600 dark:bg-slate-800/80 dark:text-slate-100 dark:hover:border-cyan-300 dark:hover:text-cyan-200 max-[420px]:w-full max-[420px]:justify-center"
@@ -101,7 +101,7 @@ const Home = () => {
               className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-emerald-500/45 bg-emerald-500/10 px-4 py-2.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-500/20 dark:border-emerald-400/50 dark:text-emerald-200 max-[420px]:w-full max-[420px]:justify-center"
             >
               Download My CV <IoMdDownload className="text-lg" />
-            </button>
+            </button> */}
           </div>
         </div>
 

@@ -52,9 +52,9 @@ const Education = () => {
             <div className="space-y-4">
               {educationHistory.map((edu) => (
                 <div key={edu.school} className="rounded-2xl border border-slate-300 bg-white/90 p-4 transition hover:border-cyan-400/60 dark:border-slate-700 dark:bg-slate-900/75">
-                  <p className="break-words font-semibold text-slate-800 dark:text-slate-100">{edu.school}</p>
+                  <p className="wrap-break-word font-semibold text-slate-800 dark:text-slate-100">{edu.school}</p>
                   <p className="mt-1 text-sm text-cyan-700 dark:text-cyan-300">{edu.year}</p>
-                  {edu.extra && <p className="mt-1 break-words text-sm text-slate-600 dark:text-slate-300">{edu.extra}</p>}
+                  {edu.extra && <p className="mt-1 wrap-break-word text-sm text-slate-600 dark:text-slate-300">{edu.extra}</p>}
                 </div>
               ))}
             </div>
@@ -71,7 +71,7 @@ const Education = () => {
             <div className="space-y-4">
               {certificates.map((item) => (
                 <div key={`${item.name}-${item.date}`} className="rounded-2xl border border-slate-300 bg-white/90 p-4 transition hover:border-amber-300/50 dark:border-slate-700 dark:bg-slate-900/75">
-                  <p className="break-words font-semibold text-slate-800 dark:text-slate-100">{item.name}</p>
+                  <p className="wrap-break-word font-semibold text-slate-800 dark:text-slate-100">{item.name}</p>
                   <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{item.date}</p>
                 </div>
               ))}

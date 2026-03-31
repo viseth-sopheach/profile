@@ -5,7 +5,7 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const navItems = [
   { path: "/", label: "Home" },
-  { path: "/education", label: "Education nad Certificate" },
+  { path: "/education", label: "Education and Certificate" },
   { path: "/skill", label: "Skill" },
   { path: "/project", label: "Project" },
   { path: "/contact", label: "Contact Me" },
@@ -47,7 +47,7 @@ function Navbar() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 bg-slate-100 text-slate-700 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:text-cyan-300"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 bg-slate-100 text-slate-700 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:text-cyan-300 sm:hidden"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDarkMode ? <MdLightMode className="text-2xl" /> : <MdDarkMode className="text-2xl" />}
@@ -64,6 +64,16 @@ function Navbar() {
           </div>
 
           <ul className="hidden items-center gap-2 sm:flex">
+            <li>
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 bg-slate-100 text-slate-700 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:text-cyan-300"
+                aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {isDarkMode ? <MdLightMode className="text-2xl" /> : <MdDarkMode className="text-2xl" />}
+              </button>
+            </li>
             {navItems.map((item) => (
               <li key={item.path}>
                 <NavLink
