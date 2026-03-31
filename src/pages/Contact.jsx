@@ -132,36 +132,36 @@ function Contact() {
           <aside className="space-y-4 lg:col-span-2">
             <div className="glass-card rounded-2xl p-5">
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-cyan-400/15 p-3 text-cyan-300">
+                <div className="rounded-xl bg-cyan-500/15 p-3 text-cyan-700 dark:bg-cyan-400/15 dark:text-cyan-300">
                   <FaEnvelope size={18} />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-400">Email</p>
-                  <p className="font-semibold text-slate-100">visethXXX@gmail.com</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Email</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100">visetxxxxx@gamil.com</p>
                 </div>
               </div>
             </div>
 
             <div className="glass-card rounded-2xl p-5">
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-emerald-400/15 p-3 text-emerald-300">
+                <div className="rounded-xl bg-emerald-500/15 p-3 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300">
                   <FaPhoneAlt size={18} />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-400">Phone</p>
-                  <p className="font-semibold text-slate-100">(885) 123-4567</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Phone</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100">(885) 123-4567</p>
                 </div>
               </div>
             </div>
 
             <div className="glass-card rounded-2xl p-5">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-300">Social</p>
-              <div className="flex justify-between text-3xl text-slate-200">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">Social</p>
+              <div className="flex justify-between text-3xl text-slate-700 dark:text-slate-200">
                 <a
                   href="https://web.facebook.com/visethsopheach"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition hover:text-blue-300"
+                  className="transition hover:text-blue-500 dark:hover:text-blue-300"
                   aria-label="Facebook"
                 >
                   <FaFacebookSquare />
@@ -170,7 +170,7 @@ function Contact() {
                   href="https://www.instagram.com/viseth_sopheach/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition hover:text-pink-300"
+                  className="transition hover:text-pink-500 dark:hover:text-pink-300"
                   aria-label="Instagram"
                 >
                   <FaInstagramSquare />
@@ -179,7 +179,7 @@ function Contact() {
                   href="https://t.me/Viseth_Sopheach"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition hover:text-cyan-300"
+                  className="transition hover:text-cyan-500 dark:hover:text-cyan-300"
                   aria-label="Telegram"
                 >
                   <FaTelegram />
@@ -188,7 +188,7 @@ function Contact() {
                   href="https://x.com/VisethSopheach"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition hover:text-slate-400"
+                  className="transition hover:text-slate-500 dark:hover:text-slate-400"
                   aria-label="X"
                 >
                   <FaSquareXTwitter />
@@ -205,14 +205,14 @@ function Contact() {
                   required
                   type="text"
                   placeholder="Your name"
-                  className="rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
+                  className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
                 />
                 <input
                   name="user_email"
                   required
                   type="email"
                   placeholder="your@email.com"
-                  className="rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
+                  className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
                 />
               </div>
 
@@ -220,7 +220,7 @@ function Contact() {
                 name="subject"
                 type="text"
                 placeholder="Subject"
-                className="w-full rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
               />
 
               <textarea
@@ -228,15 +228,15 @@ function Contact() {
                 required
                 rows={6}
                 placeholder="Tell us more..."
-                className="w-full resize-none rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300"
+                className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
               />
 
-              <label className="flex items-center gap-2 text-sm text-slate-300">
+              <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
                 <input
                   type="checkbox"
                   checked={shareInfo}
                   onChange={(event) => setShareInfo(event.target.checked)}
-                  className="h-4 w-4 accent-cyan-400"
+                  className="h-4 w-4 accent-cyan-500 dark:accent-cyan-400"
                 />
                 Share device & location info
               </label>
@@ -244,7 +244,7 @@ function Contact() {
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full rounded-xl bg-cyan-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-xl bg-cyan-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-cyan-500 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSending ? "Sending..." : "Send Message"}
               </button>
@@ -252,7 +252,9 @@ function Contact() {
               {statusMessage && (
                 <p
                   className={`text-sm ${
-                    statusType === "success" ? "text-emerald-300" : "text-rose-300"
+                    statusType === "success"
+                      ? "text-emerald-700 dark:text-emerald-300"
+                      : "text-rose-700 dark:text-rose-300"
                   }`}
                 >
                   {statusMessage}

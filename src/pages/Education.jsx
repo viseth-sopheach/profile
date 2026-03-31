@@ -43,18 +43,18 @@ const Education = () => {
         <div className="grid gap-7 lg:grid-cols-2">
           <article className="glass-card relative overflow-hidden rounded-3xl p-6 sm:p-8">
             <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-2xl font-bold text-slate-50">Education</h2>
-              <span className="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-200">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Education</h2>
+              <span className="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-700 dark:border-cyan-400/40 dark:bg-cyan-400/10 dark:text-cyan-200">
                 Timeline
               </span>
             </div>
 
             <div className="space-y-4">
               {educationHistory.map((edu) => (
-                <div key={edu.school} className="rounded-2xl border border-slate-700 bg-slate-900/75 p-4 transition hover:border-cyan-400/60">
-                  <p className="break-words font-semibold text-slate-100">{edu.school}</p>
-                  <p className="mt-1 text-sm text-cyan-300">{edu.year}</p>
-                  {edu.extra && <p className="mt-1 break-words text-sm text-slate-300">{edu.extra}</p>}
+                <div key={edu.school} className="rounded-2xl border border-slate-300 bg-white/90 p-4 transition hover:border-cyan-400/60 dark:border-slate-700 dark:bg-slate-900/75">
+                  <p className="break-words font-semibold text-slate-800 dark:text-slate-100">{edu.school}</p>
+                  <p className="mt-1 text-sm text-cyan-700 dark:text-cyan-300">{edu.year}</p>
+                  {edu.extra && <p className="mt-1 break-words text-sm text-slate-600 dark:text-slate-300">{edu.extra}</p>}
                 </div>
               ))}
             </div>
@@ -62,17 +62,17 @@ const Education = () => {
 
           <article className="glass-card relative overflow-hidden rounded-3xl p-6 sm:p-8">
             <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-2xl font-bold text-slate-50">Certificates</h2>
-              <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-200">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Certificates</h2>
+              <span className="rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:border-amber-400/40 dark:bg-amber-400/10 dark:text-amber-200">
                 Achievements
               </span>
             </div>
 
             <div className="space-y-4">
               {certificates.map((item) => (
-                <div key={`${item.name}-${item.date}`} className="rounded-2xl border border-slate-700 bg-slate-900/75 p-4 transition hover:border-amber-300/50">
-                  <p className="break-words font-semibold text-slate-100">{item.name}</p>
-                  <p className="mt-1 text-sm text-slate-300">{item.date}</p>
+                <div key={`${item.name}-${item.date}`} className="rounded-2xl border border-slate-300 bg-white/90 p-4 transition hover:border-amber-300/50 dark:border-slate-700 dark:bg-slate-900/75">
+                  <p className="break-words font-semibold text-slate-800 dark:text-slate-100">{item.name}</p>
+                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{item.date}</p>
                 </div>
               ))}
             </div>

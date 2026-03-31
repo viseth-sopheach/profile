@@ -60,7 +60,7 @@ const Project = () => {
               key={project.id}
               onClick={() => window.open(project.link, "_blank")}
               className={[
-                "glass-card group relative cursor-pointer overflow-hidden rounded-3xl p-4 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/50",
+                "glass-card group relative cursor-pointer overflow-hidden rounded-3xl p-4 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/60 dark:hover:border-cyan-300/50",
                 index % 3 === 1 ? "delay-1" : index % 3 === 2 ? "delay-2" : "",
               ].join(" ")}
               role="button"
@@ -71,7 +71,7 @@ const Project = () => {
                 }
               }}
             >
-              <div className="relative overflow-hidden rounded-2xl border border-slate-700 bg-slate-900">
+              <div className="relative overflow-hidden rounded-2xl border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-900">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -80,13 +80,13 @@ const Project = () => {
               </div>
 
               <div className="pt-4">
-                <h2 className="text-xl font-bold text-slate-50">{project.title}</h2>
-                <p className="mt-1 text-sm text-slate-300">{project.stack}</p>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{project.title}</h2>
+                <p className="mt-1 text-sm text-slate-700 dark:text-slate-300">{project.stack}</p>
               </div>
 
-              <div className="mt-4 flex items-center justify-between rounded-xl border border-slate-700 bg-slate-900/80 px-3 py-2 text-sm text-slate-200">
+              <div className="mt-4 flex items-center justify-between rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200">
                 <span>Open Project</span>
-                <GiClick className="text-xl text-cyan-300 transition group-hover:rotate-12" />
+                <GiClick className="text-xl text-cyan-700 transition group-hover:rotate-12 dark:text-cyan-300" />
               </div>
             </article>
           ))}

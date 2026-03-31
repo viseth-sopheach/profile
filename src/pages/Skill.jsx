@@ -40,8 +40,8 @@ const Skill = () => {
                 </span> */}
               </div>
 
-              <h2 className="text-xl font-bold text-slate-50">{skill.name}</h2>
-              <p className="mt-2 text-sm text-slate-300">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{skill.name}</h2>
+              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
                 Production-ready workflow, reusable components, and clean implementation.
               </p>
 
