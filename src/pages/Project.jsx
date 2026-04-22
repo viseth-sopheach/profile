@@ -1,9 +1,9 @@
 import { GiClick } from "react-icons/gi";
 import apple from "../assets/apple.png";
 import book from "../assets/bIcon.png";
-import download from "../assets/download.png";
+import git from "../assets/git.png";
 import qr from "../assets/qrcode.png";
-import stock from "../assets/stock.png";
+import rt from "../assets/reactjs.png";
 
 const projects = [
   {
@@ -27,20 +27,20 @@ const projects = [
     link: "https://phoneshop-woad.vercel.app/",
     stack: "React Router",
   },
-  // {
-  //   id: 4,
-  //   image: stock,
-  //   title: "Stock Market",
-  //   link: "https://stock-chi-lovat.vercel.app/",
-  //   stack: "Charts, API",
-  // },
-  // {
-  //   id: 5,
-  //   image: download,
-  //   title: "Video Downloader",
-  //   link: "https://video-downloader-o6un.onrender.com/",
-  //   stack: "Node, UI",
-  // },
+  {
+    id: 4,
+    image: rt,
+    title: "ReacjJS",
+    link: "https://advance-reactjs-two.vercel.app/",
+    stack: "React Hook, ... ",
+  },
+  {
+    id: 5,
+    image: git,
+    title: "Git",
+    link: "https://git-interactive-guide.vercel.app/",
+    stack: "React, Tailwind",
+  }
 ];
 
 const Project = () => {
