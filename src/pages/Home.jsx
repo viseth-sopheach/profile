@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaBootstrap, FaCss3, FaEye, FaHtml5, FaReact, FaVuejs } from "react-icons/fa";
-import { FaJava, FaPhp } from "react-icons/fa6";
+import { FaJava, FaLaravel, FaPhp } from "react-icons/fa6";
+import { GrMysql } from "react-icons/gr";
 import { IoLogoJavascript, IoMdDownload } from "react-icons/io";
 import { RiTailwindCssLine } from "react-icons/ri";
+import { SiPostgresql } from "react-icons/si";
 import cv from "../assets/cv.png";
 import profileImage from "../assets/seth.png";
 
@@ -12,19 +14,28 @@ const Home = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const fullText = "I am a Full Stack Web Developer";
 
-  const sideIcons = [
+  const topIcons = [
     { name: "React", icon: <FaReact className="h-7 w-7 text-cyan-300" /> },
     { name: "Tailwind", icon: <RiTailwindCssLine className="h-7 w-7 text-sky-300" /> },
     { name: "Java", icon: <FaJava className="h-7 w-7 text-orange-300" /> },
+  ];
+
+  const leftIcons = [
     { name: "Vue", icon: <FaVuejs className="h-7 w-7 text-emerald-300" /> },
     { name: "Php", icon: <FaPhp className="h-7 w-7 text-blue-500" /> },
+    { name: "Laravel", icon: <FaLaravel className="h-7 w-7 text-red-400" /> },
+  ];
+
+  const rightIcons = [
+    { name: "MySQL", icon: <GrMysql className="h-7 w-7 text-sky-500" /> },
+    { name: "PostgreSQL", icon: <SiPostgresql className="h-7 w-7 text-indigo-400" /> },
+    { name: "Bootstrap", icon: <FaBootstrap className="h-7 w-7 text-purple-400" /> },
   ];
 
   const bottomIcons = [
     { name: "HTML", icon: <FaHtml5 className="h-7 w-7 text-orange-400" /> },
     { name: "CSS", icon: <FaCss3 className="h-7 w-7 text-blue-400" /> },
     { name: "JavaScript", icon: <IoLogoJavascript className="h-7 w-7 text-yellow-400" /> },
-    { name: "Bootstrap", icon: <FaBootstrap className="h-7 w-7 text-purple-400" /> },
   ];
 
   useEffect(() => {
@@ -58,9 +69,9 @@ const Home = () => {
   };
 
   return (
-    <section className="section-shell soft-grid">
+    <section className="section-shell">
       <div className="content-wrap grid grid-cols-1 gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:items-center md:gap-8">
-        <div className="relative min-w-0 space-y-6 rounded-3xl border border-slate-300 bg-white/75 p-6 shadow-2xl backdrop-blur-md dark:border-slate-700/70 dark:bg-slate-900/55 sm:p-9">
+        <article className="glass-card relative min-w-0 space-y-6 overflow-hidden rounded-3xl p-6 sm:p-9">
           <p className="inline-flex items-center rounded-full border border-cyan-500/40 bg-cyan-500/10 px-3 py-1 text-xs font-semibold tracking-wide text-cyan-700 dark:border-cyan-300/40 dark:bg-cyan-400/10 dark:text-cyan-200">
             Full Stack Web Developer
           </p>
@@ -103,13 +114,13 @@ const Home = () => {
               Download My CV <IoMdDownload className="text-lg" />
             </button> */}
           </div>
-        </div>
+        </article>
 
         <div className="relative min-w-0 glow-dot amber">
           <div className="glass-card overflow-hidden rounded-3xl p-6 sm:p-8">
-            <div className="flex min-w-0 flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-              <div className="grid grid-cols-4 gap-2 sm:block sm:space-y-3">
-                {sideIcons.map((item, index) => (
+            <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-4 lg:max-w-md">
+              <div className="grid w-full grid-cols-3 gap-3 place-items-center">
+                {topIcons.map((item, index) => (
                   <div
                     key={item.name}
                     className={[
@@ -124,27 +135,61 @@ const Home = () => {
                 ))}
               </div>
 
-              <img
-                className="w-40 max-w-full rounded-2xl border border-slate-300 object-cover shadow-2xl dark:border-slate-600/70 sm:w-56 md:w-64"
-                src={profileImage}
-                alt="Sopheach Viseth"
-              />
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {bottomIcons.map((item, index) => (
-                <div
-                  key={item.name}
-                  className={[
-                    "flex h-12 items-center justify-center rounded-xl border border-slate-300 bg-white/90 dark:border-slate-600 dark:bg-slate-800/75",
-                    "animate-[float_5s_ease-in-out_infinite]",
-                    index === 1 ? "delay-1" : index === 2 ? "delay-2" : index === 3 ? "delay-3" : "",
-                  ].join(" ")}
-                  title={item.name}
-                >
-                  {item.icon}
+              <div className="flex w-full items-center justify-center gap-2 lg:gap-3">
+                <div className="flex flex-col gap-2 lg:gap-3">
+                  {leftIcons.map((item, index) => (
+                    <div
+                      key={item.name}
+                      className={[
+                        "flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300 bg-white/90 dark:border-slate-600 dark:bg-slate-800/80 lg:h-12 lg:w-12",
+                        "animate-[float_5s_ease-in-out_infinite]",
+                        index === 1 ? "delay-1" : index === 2 ? "delay-2" : "",
+                      ].join(" ")}
+                      title={item.name}
+                    >
+                      {item.icon}
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+                <img
+                  className="w-32 max-w-full rounded-2xl border border-slate-300 object-cover shadow-2xl dark:border-slate-600/70 sm:w-40 md:w-44 lg:w-56"
+                  src={profileImage}
+                  alt="Sopheach Viseth"
+                />
+
+                <div className="flex flex-col gap-2 lg:gap-3">
+                  {rightIcons.map((item, index) => (
+                    <div
+                      key={item.name}
+                      className={[
+                        "flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300 bg-white/90 dark:border-slate-600 dark:bg-slate-800/80 lg:h-12 lg:w-12",
+                        "animate-[float_5s_ease-in-out_infinite]",
+                        index === 1 ? "delay-1" : index === 2 ? "delay-2" : "",
+                      ].join(" ")}
+                      title={item.name}
+                    >
+                      {item.icon}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid w-full grid-cols-3 gap-3 place-items-center">
+                {bottomIcons.map((item, index) => (
+                  <div
+                    key={item.name}
+                    className={[
+                      "flex h-12 w-12 items-center justify-center rounded-xl border border-slate-300 bg-white/90 dark:border-slate-600 dark:bg-slate-800/75",
+                      "animate-[float_5s_ease-in-out_infinite]",
+                      index === 1 ? "delay-1" : index === 2 ? "delay-2" : "",
+                    ].join(" ")}
+                    title={item.name}
+                  >
+                    {item.icon}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

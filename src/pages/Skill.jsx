@@ -2,6 +2,9 @@ import { FaBootstrap, FaCss3, FaHtml5, FaPhp, FaReact, FaVuejs } from "react-ico
 import { FaJava } from "react-icons/fa6";
 import { IoLogoJavascript } from "react-icons/io5";
 import { RiTailwindCssLine } from "react-icons/ri";
+import { FaLaravel } from "react-icons/fa6";
+import { GrMysql } from "react-icons/gr";
+import { SiPostgresql } from "react-icons/si";
 
 const Skill = () => {
   const skills = [
@@ -13,7 +16,10 @@ const Skill = () => {
     { name: "React JS", icon: <FaReact />, color: "text-cyan-300" },
     { name: "Vue JS", icon: <FaVuejs />, color: "text-emerald-300" },
     { name: "Java", icon: <FaJava />, color: "text-orange-300" },
-    { name: "Php", icon: <FaPhp />, color: "text-indigo-300" },
+    { name: "PHP", icon: <FaPhp />, color: "text-indigo-300" },
+    { name: "Laravel", icon: <FaLaravel />, color: "text-indigo-300" },
+    { name: "MySQL", icon: <GrMysql />, color: "text-indigo-300" },
+    { name: "PostgreSQL", icon: <SiPostgresql />, color: "text-indigo-300" },
   ];
 
   return (
@@ -29,28 +35,30 @@ const Skill = () => {
             <article
               key={skill.name}
               className={[
-                "glass-card group relative overflow-hidden rounded-3xl p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/50",
+                "glass-card group relative overflow-hidden rounded-3xl p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(8,145,178,0.18)] hover:border-cyan-300/50",
+                index % 2 === 0 ? "glow-dot teal" : "glow-dot amber",
                 index % 3 === 1 ? "delay-1" : index % 3 === 2 ? "delay-2" : "",
               ].join(" ")}
             >
-              <div className="mb-5 flex items-center justify-between">
-                <div className={`text-4xl ${skill.color}`}>{skill.icon}</div>
-                {/* <span className="rounded-full border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-slate-300">
-                  {skill.level}
-                </span> */}
+              <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-400/70 to-transparent opacity-80" />
+
+              <div className="relative flex items-start justify-between gap-4">
+                <div className="space-y-3">
+                  <span className="inline-flex rounded-full border border-cyan-500/25 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-700 dark:border-cyan-400/25 dark:bg-cyan-400/10 dark:text-cyan-200">
+                    Skill
+                  </span>
+
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{skill.name}</h2>
+
+                  {/* <p className="max-w-[22ch] text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    Practical experience building interfaces and features with {skill.name}.
+                  </p> */}
+                </div>
+
+                <div className="rounded-2xl border border-white/60 bg-white/70 p-4 shadow-lg shadow-slate-200/70 backdrop-blur-sm dark:border-slate-700/70 dark:bg-slate-900/70 dark:shadow-slate-950/30">
+                  <div className={`text-4xl transition duration-300 group-hover:scale-110 ${skill.color}`}>{skill.icon}</div>
+                </div>
               </div>
-
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{skill.name}</h2>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Production-ready workflow, reusable components, and clean implementation.
-              </p>
-
-              {/* <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-700">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-300"
-                  style={{ width: skill.level === "Advanced" ? "88%" : "68%" }}
-                />
-              </div> */}
             </article>
           ))}
         </div>

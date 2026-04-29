@@ -230,7 +230,7 @@ function Contact() {
                 placeholder="Tell us more..."
                 className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
               />
-
+{/* 
               <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
                 <input
                   type="checkbox"
@@ -239,14 +239,14 @@ function Contact() {
                   className="h-4 w-4 accent-cyan-500 dark:accent-cyan-400"
                 />
                 Share device & location info
-              </label>
+              </label> */}
 
               <button
                 type="submit"
                 disabled={isSending}
                 className="w-full rounded-xl bg-cyan-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-cyan-500 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {isSending ? "Sending..." : "Send Message"}
+                {isSending ? "Sending..." : "Send Message (Just UI, it cannot send message)"}
               </button>
 
               {statusMessage && (
