@@ -8,6 +8,10 @@ const certificates = [
     date: "15-11-2025",
   },
   {
+    name: "Web-Backend Development Certificate - Etect Center",
+    date: "09-07-2026",
+  },
+  {
     name: "BacII និទ្ទេស B ( ទទួលបាននិទ្ទេស A លើមុខវិជ្ជា គណិតវិទ្យា រូបវិទ្យានិងគីមីវិទ្យា )",
     date: "2024",
   },
