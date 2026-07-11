@@ -7,83 +7,53 @@ import {
   FaTelegram,
 } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import Toast from "../compoments/Toast";
+
+const isValidEmail = (value = "") =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
 function Contact() {
   const formRef = useRef();
   const [isSending, setIsSending] = useState(false);
-  const [shareInfo, setShareInfo] = useState(false);
-  const [statusMessage, setStatusMessage] = useState("");
-  const [statusType, setStatusType] = useState("idle");
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [toast, setToast] = useState(null); // { type: "success" | "error", message: string }
 
-  const getDeviceInfo = () => {
-    const ua = navigator.userAgent;
+  const validate = (form) => {
+    const errors = {};
+    const name = form.user_name.value.trim();
+    const email = form.user_email.value.trim();
+    const message = form.message.value.trim();
 
-    const browser = ua.includes("Edg")
-      ? "Edge"
-      : ua.includes("Firefox")
-        ? "Firefox"
-        : ua.includes("Chrome")
-          ? "Chrome"
-          : ua.includes("Safari")
-            ? "Safari"
-            : "Unknown";
+    if (!name) errors.user_name = "Name is required.";
+    if (!email) errors.user_email = "Email is required.";
+    else if (!isValidEmail(email))
+      errors.user_email = "Enter a valid email address.";
+    if (!message) errors.message = "Message cannot be empty.";
 
-    const os = ua.includes("Android")
-      ? "Android"
-      : ua.includes("iPhone") || ua.includes("iPad")
-        ? "iOS"
-        : ua.includes("Win")
-          ? "Windows"
-          : ua.includes("Mac")
-            ? "MacOS"
-            : ua.includes("Linux")
-              ? "Linux"
-              : "Unknown";
-
-    return {
-      browser,
-      os,
-      screen: `${window.screen.width}x${window.screen.height}`,
-      language: navigator.language,
-    };
+    return errors;
   };
 
-  const getLocation = (timeout = 8000) => {
-    return new Promise((resolve) => {
-      if (!navigator.geolocation) {
-        resolve({ error: "Geolocation not supported" });
-        return;
-      }
-
-      navigator.geolocation.getCurrentPosition(
-        (pos) =>
-          resolve({
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude,
-            accuracy: pos.coords.accuracy,
-          }),
-        (err) => resolve({ error: err.message }),
-        { timeout },
-      );
-    });
-  };
-
+  // Only these 4 fields are ever sent to the backend / Gmail.
   const buildTemplateParams = (form) => ({
-    user_name: form.user_name.value,
-    user_email: form.user_email.value,
-    subject: form.subject.value,
-    message: form.message.value,
-    timestamp: new Date().toLocaleString(),
+    user_name: form.user_name.value.trim(),
+    user_email: form.user_email.value.trim(),
+    subject: form.subject.value.trim(),
+    message: form.message.value.trim(),
   });
 
   const sendEmail = async (event) => {
     event.preventDefault();
+    const form = formRef.current;
+
+    const errors = validate(form);
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
     setIsSending(true);
-    setStatusMessage("");
-    setStatusType("idle");
+    setToast(null);
 
     try {
-      const templateParams = buildTemplateParams(formRef.current);
+      const templateParams = buildTemplateParams(form);
 
       const response = await fetch("/api/send-email", {
         method: "POST",
@@ -99,17 +69,32 @@ function Contact() {
         );
       }
 
-      setStatusType("success");
-      setStatusMessage(data.message || "Message sent successfully!");
-      formRef.current.reset();
+      setToast({
+        type: "success",
+        message:
+          data.message ||
+          "Message sent successfully! I'll get back to you soon.",
+      });
+      form.reset();
+      setFieldErrors({});
     } catch (error) {
       console.error(error);
-      setStatusType("error");
-      setStatusMessage(error.message || "Failed to send message.");
+      setToast({
+        type: "error",
+        message: error.message || "Failed to send message. Please try again.",
+      });
     } finally {
       setIsSending(false);
     }
   };
+
+  const inputClass = (field) =>
+    [
+      "w-full rounded-xl border bg-white px-4 py-3 text-slate-800 outline-none transition dark:bg-slate-900 dark:text-slate-100",
+      fieldErrors[field]
+        ? "border-rose-400 focus:border-rose-500 dark:border-rose-500/70"
+        : "border-slate-300 focus:border-cyan-500 dark:border-slate-600 dark:focus:border-cyan-300",
+    ].join(" ");
 
   return (
     <section className="section-shell">
@@ -202,74 +187,100 @@ function Contact() {
           </aside>
 
           <div className="glass-card rounded-3xl p-6 sm:p-8 lg:col-span-3">
-            <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+            <form
+              ref={formRef}
+              onSubmit={sendEmail}
+              noValidate
+              className="space-y-4"
+            >
               <div className="grid gap-4 sm:grid-cols-2">
-                <input
-                  name="user_name"
-                  required
-                  type="text"
-                  placeholder="Your name"
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
-                />
-                <input
-                  name="user_email"
-                  required
-                  type="email"
-                  placeholder="your@email.com"
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
-                />
+                <div>
+                  <input
+                    name="user_name"
+                    type="text"
+                    placeholder="Your name"
+                    className={inputClass("user_name")}
+                    onChange={() =>
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        user_name: undefined,
+                      }))
+                    }
+                  />
+                  {fieldErrors.user_name && (
+                    <p className="mt-1 text-xs font-medium text-rose-600 dark:text-rose-400">
+                      {fieldErrors.user_name}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    name="user_email"
+                    type="email"
+                    placeholder="your@email.com"
+                    className={inputClass("user_email")}
+                    onChange={() =>
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        user_email: undefined,
+                      }))
+                    }
+                  />
+                  {fieldErrors.user_email && (
+                    <p className="mt-1 text-xs font-medium text-rose-600 dark:text-rose-400">
+                      {fieldErrors.user_email}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <input
                 name="subject"
                 type="text"
                 placeholder="Subject"
-                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
+                className={inputClass("subject")}
               />
 
-              <textarea
-                name="message"
-                required
-                rows={6}
-                placeholder="Tell us more..."
-                className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
-              />
-              {/* 
-              <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
-                <input
-                  type="checkbox"
-                  checked={shareInfo}
-                  onChange={(event) => setShareInfo(event.target.checked)}
-                  className="h-4 w-4 accent-cyan-500 dark:accent-cyan-400"
+              <div>
+                <textarea
+                  name="message"
+                  rows={6}
+                  placeholder="Tell us more..."
+                  className={`resize-none ${inputClass("message")}`}
+                  onChange={() =>
+                    setFieldErrors((prev) => ({ ...prev, message: undefined }))
+                  }
                 />
-                Share device & location info
-              </label> */}
+                {fieldErrors.message && (
+                  <p className="mt-1 text-xs font-medium text-rose-600 dark:text-rose-400">
+                    {fieldErrors.message}
+                  </p>
+                )}
+              </div>
 
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full rounded-xl bg-cyan-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-cyan-500 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-cyan-500 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {isSending
-                  ? "Sending..."
-                  : "Send Message (Just UI, it cannot send message)"}
+                {isSending && (
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white dark:border-slate-950/40 dark:border-t-slate-950" />
+                )}
+                {isSending ? "Sending..." : "Send Message"}
               </button>
-
-              {statusMessage && (
-                <p
-                  className={`text-sm ${
-                    statusType === "success"
-                      ? "text-emerald-700 dark:text-emerald-300"
-                      : "text-rose-700 dark:text-rose-300"
-                  }`}
-                >
-                  {statusMessage}
-                </p>
-              )}
             </form>
           </div>
         </div>
       </div>
+
+      {toast && (
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </section>
   );
 }
