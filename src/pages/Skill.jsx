@@ -4,7 +4,7 @@ import { IoLogoJavascript } from "react-icons/io5";
 import { RiTailwindCssLine } from "react-icons/ri";
 import { FaLaravel } from "react-icons/fa6";
 import { GrMysql } from "react-icons/gr";
-import { SiPostgresql } from "react-icons/si";
+import { SiPostgresql, SiNuxtdotjs } from "react-icons/si";
 
 const Skill = () => {
   const skills = [
@@ -15,6 +15,7 @@ const Skill = () => {
     { name: "Tailwind CSS", icon: <RiTailwindCssLine />, color: "text-cyan-300" },
     { name: "React JS", icon: <FaReact />, color: "text-cyan-300" },
     { name: "Vue JS", icon: <FaVuejs />, color: "text-emerald-300" },
+    { name: "Nuxt", icon: <SiNuxtdotjs />, color: "text-emerald-300" },
     { name: "Java", icon: <FaJava />, color: "text-orange-300" },
     { name: "PHP", icon: <FaPhp />, color: "text-indigo-300" },
     { name: "Laravel", icon: <FaLaravel />, color: "text-indigo-300" },

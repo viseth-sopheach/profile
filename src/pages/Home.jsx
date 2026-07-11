@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
-import { FaBootstrap, FaCss3, FaEye, FaHtml5, FaReact, FaVuejs } from "react-icons/fa";
+import {
+  FaBootstrap,
+  FaCss3,
+  FaEye,
+  FaHtml5,
+  FaReact,
+  FaVuejs,
+} from "react-icons/fa";
+import { SiNuxtdotjs } from "react-icons/si";
 import { FaJava, FaLaravel, FaPhp } from "react-icons/fa6";
 import { GrMysql } from "react-icons/gr";
 import { IoLogoJavascript, IoMdDownload } from "react-icons/io";
 import { RiTailwindCssLine } from "react-icons/ri";
 import { SiPostgresql } from "react-icons/si";
-import cv from "../assets/cv.png";
+// import cv from "../assets/cv.png";
 import profileImage from "../assets/seth.png";
 
 const Home = () => {
@@ -16,26 +24,42 @@ const Home = () => {
 
   const topIcons = [
     { name: "React", icon: <FaReact className="h-7 w-7 text-cyan-300" /> },
-    { name: "Tailwind", icon: <RiTailwindCssLine className="h-7 w-7 text-sky-300" /> },
-    { name: "Java", icon: <FaJava className="h-7 w-7 text-orange-300" /> },
+    {
+      name: "Tailwind",
+      icon: <RiTailwindCssLine className="h-7 w-7 text-sky-300" />,
+    },
+    { name: "Vue", icon: <FaVuejs className="h-7 w-7 text-emerald-300" /> },
+    {
+      name: "Nuxt",
+      icon: <SiNuxtdotjs className="h-7 w-7 text-green-500" />,
+    },
   ];
 
   const leftIcons = [
-    { name: "Vue", icon: <FaVuejs className="h-7 w-7 text-emerald-300" /> },
+    { name: "Java", icon: <FaJava className="h-7 w-7 text-orange-300" /> },
     { name: "Php", icon: <FaPhp className="h-7 w-7 text-blue-500" /> },
     { name: "Laravel", icon: <FaLaravel className="h-7 w-7 text-red-400" /> },
   ];
 
   const rightIcons = [
     { name: "MySQL", icon: <GrMysql className="h-7 w-7 text-sky-500" /> },
-    { name: "PostgreSQL", icon: <SiPostgresql className="h-7 w-7 text-indigo-400" /> },
-    { name: "Bootstrap", icon: <FaBootstrap className="h-7 w-7 text-purple-400" /> },
+    {
+      name: "PostgreSQL",
+      icon: <SiPostgresql className="h-7 w-7 text-indigo-400" />,
+    },
+    {
+      name: "Bootstrap",
+      icon: <FaBootstrap className="h-7 w-7 text-purple-400" />,
+    },
   ];
 
   const bottomIcons = [
     { name: "HTML", icon: <FaHtml5 className="h-7 w-7 text-orange-400" /> },
     { name: "CSS", icon: <FaCss3 className="h-7 w-7 text-blue-400" /> },
-    { name: "JavaScript", icon: <IoLogoJavascript className="h-7 w-7 text-yellow-400" /> },
+    {
+      name: "JavaScript",
+      icon: <IoLogoJavascript className="h-7 w-7 text-yellow-400" />,
+    },
   ];
 
   useEffect(() => {
@@ -48,7 +72,11 @@ const Home = () => {
       } else if (isDeleting && text === "") {
         setIsDeleting(false);
       } else {
-        setText((current) => (isDeleting ? current.slice(0, -1) : fullText.slice(0, current.length + 1)));
+        setText((current) =>
+          isDeleting
+            ? current.slice(0, -1)
+            : fullText.slice(0, current.length + 1),
+        );
       }
     }, typingSpeed);
 
@@ -76,19 +104,27 @@ const Home = () => {
             Full Stack Web Developer
           </p>
 
-          <h1 className="text-3xl font-extrabold leading-tight text-slate-900 dark:text-slate-50 sm:text-4xl lg:text-5xl">Welcome to my portfolio</h1>
+          <h1 className="text-3xl font-extrabold leading-tight text-slate-900 dark:text-slate-50 sm:text-4xl lg:text-5xl">
+            Welcome to my portfolio
+          </h1>
 
           <p className="max-w-full text-base leading-relaxed text-slate-700 dark:text-slate-300 sm:text-lg">
-            I am Sopheach Viseth, a Computer Science student building modern web applications and continuously improving my backend and frontend skills.
+            I am Sopheach Viseth, a Computer Science student building modern web
+            applications and continuously improving my backend and frontend
+            skills.
           </p>
 
           <h2 className="min-h-14 text-xl font-bold text-slate-800 dark:text-slate-100 sm:text-2xl">
             {text}
-            <span className="ml-1 animate-pulse text-cyan-600 dark:text-cyan-300">|</span>
+            <span className="ml-1 animate-pulse text-cyan-600 dark:text-cyan-300">
+              |
+            </span>
           </h2>
 
           <p className="max-w-2xl text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base">
-            My goal is to become a full-stack developer specializing in web and mobile applications, while building a professional career with a degree in Computer Science.
+            My goal is to become a full-stack developer specializing in web and
+            mobile applications, while building a professional career with a
+            degree in Computer Science.
           </p>
 
           <div className="flex flex-wrap gap-2.5 pt-2 sm:gap-3">
@@ -119,7 +155,7 @@ const Home = () => {
         <div className="relative min-w-0 glow-dot amber">
           <div className="glass-card overflow-hidden rounded-3xl p-6 sm:p-8">
             <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-4 lg:max-w-md">
-              <div className="grid w-full grid-cols-3 gap-3 place-items-center">
+              <div className="grid w-full grid-cols-4 gap-3 place-items-center">
                 {topIcons.map((item, index) => (
                   <div
                     key={item.name}
@@ -207,7 +243,11 @@ const Home = () => {
               X
             </button>
             <div className="max-h-[85vh] overflow-auto rounded-xl border border-slate-300 bg-slate-100 p-3 dark:border-slate-700 dark:bg-slate-950">
-              <img src={cv} alt="Viseth CV" className="mx-auto h-auto max-h-[80vh] w-full max-w-4xl object-contain" />
+              <img
+                src={cv}
+                alt="Viseth CV"
+                className="mx-auto h-auto max-h-[80vh] w-full max-w-4xl object-contain"
+              />
             </div>
           </div>
         </div>
