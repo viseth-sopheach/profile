@@ -242,13 +242,6 @@ const Home = () => {
             >
               X
             </button>
-            <div className="max-h-[85vh] overflow-auto rounded-xl border border-slate-300 bg-slate-100 p-3 dark:border-slate-700 dark:bg-slate-950">
-              <img
-                src={cv}
-                alt="Viseth CV"
-                className="mx-auto h-auto max-h-[80vh] w-full max-w-4xl object-contain"
-              />
-            </div>
           </div>
         </div>
       )}
