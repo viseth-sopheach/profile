@@ -68,17 +68,11 @@ function Contact() {
     });
   };
 
-  const buildTemplateParams = (form, device, location) => ({
+  const buildTemplateParams = (form) => ({
     user_name: form.user_name.value,
     user_email: form.user_email.value,
     subject: form.subject.value,
     message: form.message.value,
-    device_info: device
-      ? `Browser: ${device.browser}, OS: ${device.os}, Screen: ${device.screen}, Lang: ${device.language}`
-      : "Not shared",
-    location_info: location
-      ? location.error || `Lat: ${location.lat}, Lng: ${location.lng}, ±${location.accuracy}m`
-      : "Not shared",
     timestamp: new Date().toLocaleString(),
   });
 
@@ -89,9 +83,7 @@ function Contact() {
     setStatusType("idle");
 
     try {
-      const device = shareInfo ? getDeviceInfo() : null;
-      const location = shareInfo ? await getLocation() : null;
-      const templateParams = buildTemplateParams(formRef.current, device, location);
+      const templateParams = buildTemplateParams(formRef.current);
 
       const response = await fetch("/api/send-email", {
         method: "POST",
@@ -102,13 +94,14 @@ function Contact() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.details || data.error || "Failed to send message.");
+        throw new Error(
+          data.details || data.error || "Failed to send message.",
+        );
       }
 
       setStatusType("success");
       setStatusMessage(data.message || "Message sent successfully!");
       formRef.current.reset();
-      setShareInfo(false);
     } catch (error) {
       console.error(error);
       setStatusType("error");
@@ -124,7 +117,8 @@ function Contact() {
         <header className="mb-10">
           <h1 className="section-title">ទាក់ទងមកកាន់ខ្ញុំ !!!</h1>
           <p className="section-subtitle">
-            Have a question or want to work together? We'd love to hear from you.
+            Have a question or want to work together? We'd love to hear from
+            you.
           </p>
         </header>
 
@@ -136,8 +130,12 @@ function Contact() {
                   <FaEnvelope size={18} />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Email</p>
-                  <p className="font-semibold text-slate-800 dark:text-slate-100">visetxxxxx@gamil.com</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    Email
+                  </p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100">
+                    visetxxxxx@gamil.com
+                  </p>
                 </div>
               </div>
             </div>
@@ -148,14 +146,20 @@ function Contact() {
                   <FaPhoneAlt size={18} />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Phone</p>
-                  <p className="font-semibold text-slate-800 dark:text-slate-100">(885) 123-4567</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    Phone
+                  </p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100">
+                    (885) 123-4567
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="glass-card rounded-2xl p-5">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">Social</p>
+              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">
+                Social
+              </p>
               <div className="flex justify-between text-3xl text-slate-700 dark:text-slate-200">
                 <a
                   href="https://web.facebook.com/visethsopheach"
@@ -230,7 +234,7 @@ function Contact() {
                 placeholder="Tell us more..."
                 className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-cyan-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-300"
               />
-{/* 
+              {/* 
               <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
                 <input
                   type="checkbox"
@@ -246,7 +250,9 @@ function Contact() {
                 disabled={isSending}
                 className="w-full rounded-xl bg-cyan-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-cyan-500 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {isSending ? "Sending..." : "Send Message (Just UI, it cannot send message)"}
+                {isSending
+                  ? "Sending..."
+                  : "Send Message (Just UI, it cannot send message)"}
               </button>
 
               {statusMessage && (
