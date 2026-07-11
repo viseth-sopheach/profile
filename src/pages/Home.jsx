@@ -7,7 +7,7 @@ import {
   FaReact,
   FaVuejs,
 } from "react-icons/fa";
-import { SiNuxtdotjs } from "react-icons/si";
+import { SiNuxt } from "react-icons/si";
 import { FaJava, FaLaravel, FaPhp } from "react-icons/fa6";
 import { GrMysql } from "react-icons/gr";
 import { IoLogoJavascript, IoMdDownload } from "react-icons/io";
@@ -31,7 +31,7 @@ const Home = () => {
     { name: "Vue", icon: <FaVuejs className="h-7 w-7 text-emerald-300" /> },
     {
       name: "Nuxt",
-      icon: <SiNuxtdotjs className="h-7 w-7 text-green-500" />,
+      icon: <SiNuxt className="h-7 w-7 text-green-500" />,
     },
   ];
 
