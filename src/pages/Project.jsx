@@ -28,14 +28,14 @@ const projects = [
     id: 3,
     image: <MdNoDrinks />,
     title: "Drink Shop",
-    link: "https://git-interactive-guide.vercel.app/",
+    link: "https://edrink.onrender.com/",
     stack: "Laaravel, React",
   },
   {
     id: 4,
     image: <TbScooterElectric />,
-    title: "Electronic Store",
-    link: "https://git-interactive-guide.vercel.app/",
+    title: "Electronic Store, (not hosting yet)",
+    link: "https://seth-library.onrender.com/",
     stack: "Nuxt, Vue",
   },
   {
