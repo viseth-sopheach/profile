@@ -21,7 +21,7 @@ const projects = [
     id: 2,
     image: <FaComputer />,
     title: "Computer Store",
-    link: "https://git-interactive-guide.vercel.app/",
+    link: "https://estore-nj83.onrender.com/",
     stack: "Laravel, React",
   },
   {
