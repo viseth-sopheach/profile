@@ -28,7 +28,7 @@ const projects = [
     id: 3,
     image: <MdNoDrinks />,
     title: "Drink Shop",
-    link: "https://seth-cafe.vercel.app/",
+    link: "https://cafe-nu-five.vercel.app/",
     stack: "Laaravel, React",
   },
   {
