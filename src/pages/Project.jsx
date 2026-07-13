@@ -21,7 +21,7 @@ const projects = [
     id: 2,
     image: <FaComputer />,
     title: "Computer Store",
-    link: "https://pc-store-12o9ixrx0-viseths-projects.vercel.app/",
+    link: "https://pc-store-chi.vercel.app/",
     stack: "Laravel, React",
   },
   {
