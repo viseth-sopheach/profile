@@ -4,7 +4,7 @@ import book from "../assets/bIcon.png";
 import git from "../assets/git.png";
 import qr from "../assets/qrcode.png";
 import LB from "../assets/reactjs.png";
-import { LuBookOpenText } from "react-icons/lu";
+import { LuBookOpenText, LuSchool } from "react-icons/lu";
 import { FaComputer } from "react-icons/fa6";
 import { MdNoDrinks } from "react-icons/md";
 import { TbScooterElectric } from "react-icons/tb";
@@ -33,27 +33,34 @@ const projects = [
   },
   {
     id: 4,
+    image: <LuSchool />,
+    title: "School management system",
+    link: "https://school-management-system-sandy-nine.vercel.app/",
+    stack: "Laaravel, React",
+  },
+  {
+    id: 5,
     image: <TbScooterElectric />,
     title: "Electronic Store, (not hosting yet)",
     link: "https://seth-library.onrender.com/",
     stack: "Nuxt, Vue",
   },
   {
-    id: 5,
+    id: 6,
     image: apple,
     title: "Phone Shop",
     link: "https://phoneshop-woad.vercel.app/",
     stack: "React, API, Tailwind",
   },
   {
-    id: 6,
+    id: 7,
     image: book,
     title: "BookShop Site",
     link: "https://book-one-sage.vercel.app/",
     stack: "React, Tailwind",
   },
   {
-    id: 7,
+    id: 8,
     image: qr,
     title: "QR Code Generator",
     link: "https://qrgenerator-alpha-eight.vercel.app/",
